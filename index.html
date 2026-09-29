@@ -3,37 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz</title>
+  <title>Quiz de Estudo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
+  <div class="quiz-card">
     <div id="quiz-screen">
-      <p class="progress-info">
-        Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
-      </p>
+      <div class="quiz-header">
+        <p class="progress-info">
+          Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
+        </p>
+        <button id="reset-in-quiz-btn" class="btn-text">Reiniciar</button>
+      </div>
 
-      <h1 id="question-text" class="question-title"></h1>
+      <h2 id="question-text" class="question-title"></h2>
 
-      <div id="options-container" class="options-grid"></div>
+      <div id="options-container" class="options-list"></div>
 
       <div id="explanation-box" class="explanation-box hidden">
+        <h3>Explicação:</h3>
         <p id="explanation-text"></p>
       </div>
 
-      <div class="controls-container">
-        <button id="reset-in-quiz-btn" class="btn-text">Reiniciar Quiz</button>
-        <button id="next-btn" class="btn-action hidden" disabled>Próxima Pergunta</button>
+      <div class="action-container">
+        <button id="next-btn" class="btn-primary hidden" disabled>Próxima Pergunta</button>
       </div>
     </div>
     <div id="result-screen" class="hidden">
-      <h2>Resultado do Quiz</h2>
+      <h2>Resultado Final</h2>
       <p class="result-score">
         Você acertou <span id="score">0</span> de <span id="score-total">0</span> perguntas!
       </p>
-      <button id="restart-btn" class="btn-action">Reiniciar Quiz</button>
+      <button id="restart-btn" class="btn-primary">Reiniciar Quiz</button>
     </div>
+
   </div>
 
   <script src="questions.js"></script>
