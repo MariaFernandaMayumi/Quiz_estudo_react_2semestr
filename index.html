@@ -3,43 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz de Estudos - ADS</title>
+  <title>Quiz</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <main class="main-container">
+  <div class="container">
     <div id="quiz-screen">
-      <div class="quiz-header">
-        <span class="question-count">
-          Pergunta <span id="current-question">1</span> de <span id="total-questions">15</span>
-        </span>
-      </div>
+      <p class="progress-info">
+        Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
+      </p>
 
-      <h2 id="question-text">Carregando pergunta...</h2>
+      <h1 id="question-text" class="question-title"></h1>
 
       <div id="options-container" class="options-grid"></div>
 
-      <div id="explanation-box" class="hidden">
+      <div id="explanation-box" class="explanation-box hidden">
         <p id="explanation-text"></p>
-        <button id="next-btn" class="btn primary-btn hidden">Próxima Pergunta</button>
       </div>
 
-      <div class="quiz-footer">
-        <button id="reset-in-quiz-btn" class="btn secondary-btn">Reiniciar Quiz</button>
+      <div class="controls-container">
+        <button id="reset-in-quiz-btn" class="btn-text">Reiniciar Quiz</button>
+        <button id="next-btn" class="btn-action hidden" disabled>Próxima Pergunta</button>
       </div>
     </div>
     <div id="result-screen" class="hidden">
-      <h2>Quiz Concluído! </h2>
-      <p>Sua pontuação final foi: <strong id="score">0</strong> de <strong id="score-total">0</strong>.</p>
-      <button id="restart-btn" class="btn primary-btn">Refazer Quiz</button>
+      <h2>Resultado do Quiz</h2>
+      <p class="result-score">
+        Você acertou <span id="score">0</span> de <span id="score-total">0</span> perguntas!
+      </p>
+      <button id="restart-btn" class="btn-action">Reiniciar Quiz</button>
     </div>
-  </main>
-  <nav class="nav-bar">
-    <a href="index.html" class="nav-link active">Quiz</a>
-    <a href="blogestudo.html" class="nav-link">Conteúdo e Vídeos</a>
-  </nav>
+  </div>
 
+  <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
