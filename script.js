@@ -413,21 +413,17 @@ function showQuestion() {
 }
 
 function resetState() {
-  nextBtn.classList.add("hidden");
+  nextBtn.disabled = true; 
   explanationBox.classList.add("hidden");
   optionsContainer.innerHTML = "";
 }
 
 function selectOption(selectedIndex) {
-  const currentQuestion = questions[currentQuestionIndex];
-  const buttons = optionsContainer.querySelectorAll(".option-btn");
+  explanationText.textContent = currentQuestion.explanation;
+  explanationBox.classList.remove("hidden");
 
-  buttons.forEach((button, index) => {
-    button.disabled = true;
-    if (index === currentQuestion.correct) {
-      button.classList.add("correct");
-    }
-  });
+  nextBtn.disabled = false; 
+}
 
   if (selectedIndex === currentQuestion.correct) {
     score++;
