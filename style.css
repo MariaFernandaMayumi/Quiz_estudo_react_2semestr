@@ -345,3 +345,27 @@ header {
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.acoes-quiz {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+}
+.acoes-quiz .btn {
+  flex: 1;
+  width: auto; 
+  margin-top: 0;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
