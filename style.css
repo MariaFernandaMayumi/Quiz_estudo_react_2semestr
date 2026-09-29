@@ -329,3 +329,19 @@ header {
 .btn-reiniciar:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+.acoes-quiz {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #4a5568;
+  color: #e2e8f0;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
