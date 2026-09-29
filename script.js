@@ -348,18 +348,11 @@ const scoreSpan = document.getElementById("score");
 const scoreTotalSpan = document.getElementById("score-total");
 const restartBtn = document.getElementById("restart-btn");
 
-nextBtn.addEventListener("click", handleNextQuestion);
-restartBtn.addEventListener("click", restartQuiz);
+const resetInQuizBtn = document.getElementById("reset-in-quiz-btn");
 
-<div className="acoes-quiz">
-  <button className="btn-reiniciar" onClick={reiniciarQuiz}>
-    Reiniciar
-  </button>
-
-  <button className="btn-proxima" onClick={proximaPergunta}>
-    Próxima Pergunta
-  </button>
-</div>
+if (nextBtn) nextBtn.addEventListener("click", handleNextQuestion);
+if (restartBtn) restartBtn.addEventListener("click", restartQuiz);
+if (resetInQuizBtn) resetInQuizBtn.addEventListener("click", restartQuiz);
 
 function loadProgress() {
   const savedIndex = localStorage.getItem("quiz_current_index");
@@ -467,10 +460,4 @@ function showResult() {
   scoreTotalSpan.textContent = questions.length;
 }
 
-const reiniciarQuiz = () => {
-  setIndicePergunta(0);
-  setPontuacao(0);
-  setOpcaoSelecionada(null);
-  setMostrarExplicacao(false);
-};
 initQuiz();
