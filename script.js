@@ -457,4 +457,10 @@ function showResult() {
   scoreTotalSpan.textContent = questions.length;
 }
 
+const reiniciarQuiz = () => {
+  setIndicePergunta(0);
+  setPontuacao(0);
+  setOpcaoSelecionada(null);
+  setMostrarExplicacao(false);
+};
 initQuiz();
