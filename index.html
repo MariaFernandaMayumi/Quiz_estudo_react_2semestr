@@ -7,23 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="quiz-screen">
+  <div class="quiz-header">
+    <span class="question-count">Pergunta <span id="current-question">1</span> de <span id="total-questions">15</span></span>
+  </div>
 
-  <div class="quiz-container">
-    <main id="quiz-screen">
-      <header>
-        <div id="progress">Pergunta <span id="current-question">1</span> de <span id="total-questions">0</span></div>
-        <h1 id="question-text">Carregando pergunta...</h1>
-      </header>
+  <h2 id="question-text">Carregando pergunta...</h2>
 
-      <div id="options-container" class="options-list"></div>
-
-      <div id="explanation-box" class="explanation hidden">
-        <h3>Explicação:</h3>
-        <p id="explanation-text"></p>
-      </div>
-      <div class="acoes-quiz">
-  <button id="reset-in-quiz-btn" class="btn btn-secondary">Reiniciar</button>
- <button id="next-btn" class="btn hidden">Próxima Pergunta</button>
+  <div id="options-container" class="options-grid"></div>
+  <div id="explanation-box" class="hidden">
+    <p id="explanation-text"></p>
+    <button id="next-btn" class="btn primary-btn hidden">Próxima Pergunta</button>
+  </div>
+  <div class="quiz-footer">
+    <button id="reset-in-quiz-btn" class="btn secondary-btn">Reiniciar Quiz</button>
+  </div>
 </div>
      
     </main>
