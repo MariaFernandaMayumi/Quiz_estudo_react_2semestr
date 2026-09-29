@@ -133,13 +133,17 @@ const questions = [
     correct: 1,
     explanation: "No React, o padrão de 'componente controlado' vincula a propriedade value do input diretamente ao valor de um state, e escuta o evento onChange para atualizar esse state. Isso garante uma 'fonte única da verdade' e permite validar ou reformatar o que é digitado em tempo real."
   },
-  {
+ {
     question: "13. Por que o id='contador' foi mantido dentro do <p> em Contador.jsx, mesmo já estando dentro de um componente React?",
     options: [
-        
+      "A) Porque o React exige um id em toda tag <p>",
+      "B) Para que a regra #contador do CSS original continuasse funcionando",
+      "C) Não tem motivo, é só um resquício de código",
+      "D) Porque useState precisa de um id correspondente"
     ],
     correct: 1,
-    explanation: "No React, o padrão de 'componente controlado' vincula a propriedade value do input diretamente ao valor de um state, e escuta o evento onChange para atualizar esse state. Isso garante uma 'fonte única da verdade' e permite validar ou reformatar o que é digitado em tempo real."
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "Os IDs e classes originais foram preservados para manter a compatibilidade com o CSS existente."
   },
   {
     question: "14. Qual é a principal vantagem de dividir a interface em componentes (Saudacao, Contador, MudarCor, Calculadora), em vez de um único arquivo?",
