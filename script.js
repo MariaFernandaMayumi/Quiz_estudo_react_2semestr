@@ -1,4 +1,3 @@
-// Banco de Perguntas
 const questions = [
   {
     question: "1. No JavaScript puro, como o script original pegava um elemento da página para manipulá-lo (ex: o botão de saudação)?",
@@ -351,25 +350,54 @@ const scoreTotalSpan = document.getElementById("score-total");
 const restartBtn = document.getElementById("restart-btn");
 
 nextBtn.addEventListener("click", handleNextQuestion);
-restartBtn.addEventListener("click", startQuiz);
+restartBtn.addEventListener("click", restartQuiz);
 
-startQuiz();
+function loadProgress() {
+  const savedIndex = localStorage.getItem("quiz_current_index");
+  const savedScore = localStorage.getItem("quiz_score");
 
-function startQuiz() {
+  if (savedIndex !== null && savedScore !== null) {
+    currentQuestionIndex = parseInt(savedIndex, 10);
+    score = parseInt(savedScore, 10);
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem("quiz_current_index", currentQuestionIndex);
+  localStorage.setItem("quiz_score", score);
+}
+
+function resetProgress() {
+  localStorage.removeItem("quiz_current_index");
+  localStorage.removeItem("quiz_score");
   currentQuestionIndex = 0;
   score = 0;
-  
+}
+
+function initQuiz() {
+  loadProgress();
+
+  totalQuestionsSpan.textContent = questions.length;
+  if (currentQuestionIndex >= questions.length) {
+    showResult();
+  } else {
+    resultScreen.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
+    showQuestion();
+  }
+}
+
+function restartQuiz() {
+  resetProgress();
   resultScreen.classList.add("hidden");
   quizScreen.classList.remove("hidden");
-  totalQuestionsSpan.textContent = questions.length;
-  
   showQuestion();
 }
 
 function showQuestion() {
   resetState();
   const currentQuestion = questions[currentQuestionIndex];
-  
+
   currentQuestionSpan.textContent = currentQuestionIndex + 1;
   questionText.textContent = currentQuestion.question;
 
@@ -392,7 +420,6 @@ function selectOption(selectedIndex) {
   const currentQuestion = questions[currentQuestionIndex];
   const buttons = optionsContainer.querySelectorAll(".option-btn");
 
-
   buttons.forEach((button, index) => {
     button.disabled = true;
     if (index === currentQuestion.correct) {
@@ -406,6 +433,8 @@ function selectOption(selectedIndex) {
     buttons[selectedIndex].classList.add("incorrect");
   }
 
+  saveProgress();
+
   explanationText.textContent = currentQuestion.explanation;
   explanationBox.classList.remove("hidden");
   nextBtn.classList.remove("hidden");
@@ -413,6 +442,8 @@ function selectOption(selectedIndex) {
 
 function handleNextQuestion() {
   currentQuestionIndex++;
+  saveProgress();
+
   if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
@@ -426,3 +457,5 @@ function showResult() {
   scoreSpan.textContent = score;
   scoreTotalSpan.textContent = questions.length;
 }
+
+initQuiz();
