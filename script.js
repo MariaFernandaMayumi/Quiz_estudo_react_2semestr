@@ -351,6 +351,16 @@ const restartBtn = document.getElementById("restart-btn");
 nextBtn.addEventListener("click", handleNextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
 
+<div className="acoes-quiz">
+  <button className="btn-reiniciar" onClick={reiniciarQuiz}>
+    Reiniciar
+  </button>
+
+  <button className="btn-proxima" onClick={proximaPergunta}>
+    Próxima Pergunta
+  </button>
+</div>
+
 function loadProgress() {
   const savedIndex = localStorage.getItem("quiz_current_index");
   const savedScore = localStorage.getItem("quiz_score");
