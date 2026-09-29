@@ -257,3 +257,41 @@ header {
   height: 100%;
   border: 0;
 }
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .page-container {
+    margin-top: 70px;
+    padding: 0 5px;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+.nav-bar {
+    top: 10px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 90%;
+    justify-content: center;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  /* Força os cards a ocuparem 1 coluna no telemóvel */
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .video-card {
+    padding: 12px;
+  }
+}
