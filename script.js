@@ -413,7 +413,7 @@ function showQuestion() {
   currentQuestion.options.forEach((option, index) => {
     const button = document.createElement("button");
     button.textContent = option;
-    button.classList.add("option-btn", "btn");
+    button.classList.add("option-btn");
     button.addEventListener("click", () => selectOption(index, button));
     optionsContainer.appendChild(button);
   });
@@ -447,9 +447,11 @@ function selectOption(selectedIndex, selectedButton) {
 
   saveProgress();
 
-  if (explanationText) explanationText.textContent = currentQuestion.explanation;
-  if (explanationBox) explanationBox.classList.remove("hidden");
-  
+  if (explanationText && currentQuestion.explanation) {
+    explanationText.textContent = currentQuestion.explanation;
+    explanationBox.classList.remove("hidden");
+  }
+
   if (nextBtn) {
     nextBtn.disabled = false;
     nextBtn.classList.remove("hidden");
@@ -474,5 +476,4 @@ function showResult() {
   if (scoreTotalSpan) scoreTotalSpan.textContent = questions.length;
 }
 
-// Inicializa o quiz ao carregar a página
 initQuiz();
