@@ -8,25 +8,36 @@
 </head>
 <body>
 
-  <div class="quiz-card">
-    <div id="quiz-screen">
-      <div class="quiz-header">
-        <p class="progress-info">
-          Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
-        </p>
-        <button id="reset-in-quiz-btn" class="btn-text">Reiniciar</button>
-      </div>
+ <div class="quiz-card">
 
-      <h2 id="question-text" class="question-title"></h2>
+  <nav class="nav-switcher">
+    <a href="index.html" class="nav-tab active">Quiz</a>
+    <a href="blog.html" class="nav-tab">Conteúdo e Vídeos</a>
+  </nav>
 
-      <div id="options-container" class="options-list"></div>
+  <div id="quiz-screen">
+    <div class="quiz-header">
+      <p class="progress-info">
+        Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
+      </p>
+      <button id="reset-in-quiz-btn" class="btn-text">Reiniciar</button>
+    </div>
 
-      <div id="explanation-box" class="explanation-box hidden">
-        <h3>Explicação:</h3>
-        <p id="explanation-text"></p>
-      </div>
+    <h2 id="question-text" class="question-title"></h2>
 
-      <div class="action-container">
+    <div id="options-container" class="options-list"></div>
+
+    <div id="explanation-box" class="explanation-box hidden">
+      <h3>Explicação:</h3>
+      <p id="explanation-text"></p>
+    </div>
+
+    <div class="action-container">
+      <button id="next-btn" class="btn-primary hidden" disabled>Próxima Pergunta</button>
+    </div>
+  </div>
+
+</div>
         <button id="next-btn" class="btn-primary hidden" disabled>Próxima Pergunta</button>
       </div>
     </div>
