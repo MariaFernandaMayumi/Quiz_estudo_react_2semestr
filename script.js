@@ -1,3 +1,4 @@
+// Tópicos para cálculo de desempenho
 const TOPICOS_ESTUDO = {
   DOM_IMPERATIVO_VS_DECLARATIVO: {
     nome: "Manipulação do DOM: JavaScript Puro vs. React",
@@ -24,6 +25,8 @@ const TOPICOS_ESTUDO = {
     descricao: "Revise reaproveitamento de CSS com className/id e comandos do terminal (npm create vite, npm run build, etc.)."
   }
 };
+
+// As 30 perguntas do Quiz de React
 const questions = [
   {
     question: "1. No JavaScript puro, como o script original pegava um elemento da página para manipulá-lo (ex: o botão de saudação)?",
@@ -357,9 +360,11 @@ const questions = [
   }
 ];
 
+// Estado da Aplicação
 let currentIndex = 0;
 let userAnswers = [];
 
+// Elementos do DOM
 const questionCountEl = document.getElementById("question-count");
 const questionTitleEl = document.getElementById("question-title");
 const optionsContainerEl = document.getElementById("options-container");
@@ -374,6 +379,7 @@ const finalScoreEl = document.getElementById("final-score");
 const studyRecommendationEl = document.getElementById("study-recommendation");
 const restartQuizBtn = document.getElementById("restart-quiz-btn");
 
+// Iniciar Quiz
 function initQuiz() {
   currentIndex = 0;
   userAnswers = [];
@@ -382,15 +388,19 @@ function initQuiz() {
   renderQuestion();
 }
 
+// Renderizar pergunta atual
 function renderQuestion() {
   const currentQ = questions[currentIndex];
 
+  // Atualizar contador e título
   questionCountEl.textContent = `Pergunta ${currentIndex + 1} de ${questions.length}`;
   questionTitleEl.textContent = currentQ.question;
 
+  // Limpar contêineres
   optionsContainerEl.innerHTML = "";
   explanationBoxEl.classList.add("hidden");
 
+  // Renderizar opções
   currentQ.options.forEach((optionText, index) => {
     const button = document.createElement("button");
     button.textContent = optionText;
@@ -400,12 +410,14 @@ function renderQuestion() {
   });
 }
 
+// Manipular seleção de resposta
 function handleSelectOption(selectedIndex) {
   const currentQ = questions[currentIndex];
   userAnswers.push(selectedIndex);
 
   const optionButtons = optionsContainerEl.querySelectorAll(".option-btn");
 
+  // Bloquear botões e destacar cores
   optionButtons.forEach((btn, index) => {
     btn.disabled = true;
     if (index === currentQ.correct) {
@@ -415,9 +427,12 @@ function handleSelectOption(selectedIndex) {
     }
   });
 
+  // Exibir explicação
   explanationTextEl.textContent = currentQ.explanation;
   explanationBoxEl.classList.remove("hidden");
 }
+
+// Avançar para próxima pergunta ou mostrar resultado
 nextBtn.onclick = () => {
   currentIndex++;
   if (currentIndex < questions.length) {
@@ -453,6 +468,7 @@ function showResults() {
 
   finalScoreEl.textContent = `Você acertou ${acertos} de ${questions.length} perguntas!`;
 
+  // Calcular maior tópico de erro
   let maxErros = 0;
   let piorTopicoKey = null;
 
@@ -465,7 +481,7 @@ function showResults() {
 
   if (maxErros === 0) {
     studyRecommendationEl.innerHTML = `
-      <h3>Desempenho Perfeito!</h3>
+      <h3> Desempenho Perfeito!</h3>
       <p>Parabéns! Você demonstrou domínio total sobre os conceitos de React e JS puro.</p>
     `;
   } else {
@@ -478,7 +494,9 @@ function showResults() {
   }
 }
 
+// Eventos de Reiniciar
 restartBtn.onclick = initQuiz;
 restartQuizBtn.onclick = initQuiz;
 
+// Inicializa no carregamento da página
 initQuiz();
