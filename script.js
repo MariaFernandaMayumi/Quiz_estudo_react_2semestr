@@ -1,374 +1,250 @@
 const questions = [
-  {
-    question: "1. No JavaScript puro, como o script original pegava um elemento da página para manipulá-lo (ex: o botão de saudação)?",
+ {
+    question: "1. O conceito de banco de dados nasceu junto com a invenção dos computadores eletrônicos no século XX?",
     options: [
-      "A) document.getElementById('btnSaudacao')",
-      "B) useState('btnSaudacao')",
-      "C) <button id='btnSaudacao'>",
-      "D) React.createElement('button')"
-    ],
-    correct: 0,
-    explanation: "No JavaScript nativo (Vanilla JS), o método getElementById() da interface document é o padrão para selecionar e retornar uma referência a um elemento do DOM usando seu atributo id. As opções B e D são sintaxes do React, e a opção C é a própria tag HTML."
-  },
-  {
-    question: "2. No script.js original, qual propriedade era usada para trocar o texto exibido na tela (ex: a mensagem de saudação)?",
-    options: [
-      "A) element.value",
-      "B) element.innerHTML.render()",
-      "C) setMensagem()",
-      "D) element.textContent"
-    ],
-    correct: 3,
-    explanation: "A propriedade textContent altera ou retorna o conteúdo de texto puro de um nó e de seus descendentes no DOM. A opção A (.value) é usada para campos de formulário (como <input>), B traz uma função inexistente, e C é o disparador de estado do React."
-  },
-  {
-    question: "3. Como um clique de botão era tratado no JavaScript puro do projeto original?",
-    options: [
-      "A) onClick={handleClick} dentro do JS",
-      "B) btn.onPress(funcao)",
-      "C) btn.addEventListener('click', funcao)",
-      "D) useEffect(() => {...}, [])"
-    ],
-    correct: 2,
-    explanation: "No JS puro, registramos ouvintes de eventos vinculando uma função ao elemento DOM via addEventListener(). A alternativa A é o padrão do JSX (React), B traz um método inexistente no DOM padrão, e D usa um Hook do React para efeitos colaterais."
-  },
-  {
-    question: "4. No script.js original, como a cor do texto era alterada diretamente?",
-    options: [
-      "A) texto.style.color = 'blue'",
-      "B) texto.className = 'azul'",
-      "C) setCorAzul(true)",
-      "D) texto.color.set('blue')"
-    ],
-    correct: 0,
-    explanation: "No JS puro, acessamos o objeto inline style do elemento selecionado e modificamos diretamente a propriedade CSS desejada (color). A alternativa B altera a classe CSS (não o estilo direto), C é atualização de estado no React, e D possui uma sintaxe inválida."
-  },
-  {
-    question: "5. Qual é a principal diferença de raciocínio entre o JS puro e o React ao atualizar a interface?",
-    options: [
-      "A) No React não existem eventos de clique",
-      "B) No JS puro não é possível usar funções",
-      "C) Não há diferença nenhuma entre os dois",
-      "D) No JS puro cada ação manipula o DOM diretamente; no React, uma ação atualiza o estado e o React se encarrega de atualizar a tela"
-    ],
-    correct: 3,
-    explanation: "O JS puro utiliza uma abordagem imperativa, onde você busca o elemento e altera sua estrutura passo a passo. O React usa uma abordagem declarativa, baseada no conceito de que a UI é uma função do estado (UI = f(State)): você altera os dados (estado) e a biblioteca atualiza o DOM virtual e real automaticamente."
-  },
-  {
-    question: "6. No HTML/JSX, o atributo class do HTML puro vira qual atributo dentro de um componente React?",
-    options: [
-      "A) styleClass",
-      "B) classes",
-      "C) className",
-      "D) cssName"
-    ],
-    correct: 2,
-    explanation: "Como o JSX é uma extensão do JavaScript e class é uma palavra reservada da linguagem JS (usada para criar classes/objetos), o React adotou className para definir classes CSS de elementos HTML."
-  },
-  {
-    question: "7. Como um estilo inline (ex: cor do texto) é escrito dentro de um componente React, diferente do CSS puro?",
-    options: [
-      "A) style=\"color: blue\" (string, como no HTML)",
-      "B) css={color: blue}",
-      "C) colorStyle=\"blue\"",
-      "D) style={{ color: \"blue\" }} (um objeto JavaScript)"
-    ],
-    correct: 3,
-    explanation: "Em React/JSX, atributos style recebem um objeto JavaScript. O primeiro par de chaves {} indica a entrada de uma expressão JS no JSX, e o segundo par {} define o objeto com as propriedades CSS (em camelCase se houver hífen, como backgroundColor)."
-  },
-  {
-    question: "8. No JS puro, uma variável guardava o valor do contador manualmente (ex: let contador = 0). Qual é o equivalente em React?",
-    options: [
-      "A) const [contador, setContador] = useState(0);",
-      "B) const contador = 0;",
-      "C) var contador = new State(0);",
-      "D) props.contador = 0;"
-    ],
-    correct: 0,
-    explanation: "Para que uma alteração em uma variável faça o componente recarregar na tela no React, ela precisa ser um Estado. O Hook useState retorna um par contendo o valor atual do estado e a função que permite atualizá-lo."
-  },
-  {
-    question: "9. No JS puro, o HTML e o JavaScript ficavam em arquivos separados (index.html e script.js). No React, como o HTML da interface é escrito?",
-    options: [
-      "A) Sempre em um arquivo .html separado",
-      "B) Como uma string dentro de um arquivo .css",
-      "C) Em JSX, misturado com a lógica dentro do próprio componente .jsx",
-      "D) React não usa HTML de forma alguma"
-    ],
-    correct: 2,
-    explanation: "O React une a lógica do componente e a renderização visual em um único arquivo usando a sintaxe JSX (JavaScript XML), permitindo que estruturas semelhantes a HTML existam diretamente no código JS."
-  },
-  {
-    question: "10. O que aconteceu com o arquivo style.css ao migrar o projeto de JS puro para React?",
-    options: [
-      "A) Foi reescrito inteiramente em JSX",
-      "B) Foi transformado em um objeto de estilos JavaScript",
-      "C) Foi removido, pois o React não aceita CSS",
-      "D) Foi copiado para src/style.css sem nenhuma alteração"
-    ],
-    correct: 3,
-    explanation: "O CSS tradicional pode continuar sendo reaproveitado da mesma forma. No React, basta importar o arquivo no componente principal ou na raiz (ex: import './style.css'), sem necessidade de reescrever as regras de estilo existentes."
-  },
-  {
-    question: "11. O que useState(0) retorna quando chamado dentro de um componente?",
-    options: [
-      "A) Um array com dois itens: o valor atual e uma função para atualizá-lo",
-      "B) Apenas o número 0",
-      "C) Um componente React",
-      "D) Uma promise"
-    ],
-    correct: 0,
-    explanation: "O Hook useState do React retorna uma tupla (array de 2 elementos): o índice 0 contém o estado atual (iniciado com o parâmetro passado, neste caso 0), e o índice 1 contém a função responsável por alterar esse estado e disparar a re-renderização do componente. Por isso usamos desestruturação: const [valor, setValor] = useState(0)."
-  },
-  {
-    question: "12. Por que os inputs da Calculadora.jsx usam value={numero1} junto com onChange, em vez de deixar o navegador controlar o campo sozinho?",
-    options: [
-      "A) Porque isso é obrigatório em qualquer HTML",
-      "B) Porque inputs numéricos exigem essa sintaxe especial",
-      "C) Para tornar o input 'controlado': o valor do campo fica sincronizado com o estado do React",
-      "D) Isso apenas melhora a performance visual"
-    ],
-    correct: 2,
-    explanation: "No React, o padrão de 'componente controlado' vincula a propriedade value do input diretamente ao valor de um state, e escuta o evento onChange para atualizar esse state. Isso garante uma 'fonte única da verdade' e permite validar ou reformatar o que é digitado em tempo real."
-  },
-  {
-    question: "13. Por que o id='contador' foi mantido dentro do <p> em Contador.jsx, mesmo já estando dentro de um componente React?",
-    options: [
-      "A) Porque o React exige um id em toda tag <p>",
-      "B) Não tem motivo, é só um resquício de código",
-      "C) Porque useState precisa de um id correspondente",
-      "D) Para que a regra #contador do CSS original continuasse funcionando"
-    ],
-    correct: 3,
-    topic: "ECOSSISTEMA_CSS_TOOLS",
-    explanation: "Os IDs e classes originais foram preservados para manter a compatibilidade com o CSS existente."
-  },
-  {
-    question: "14. Qual é a principal vantagem de dividir a interface em componentes (Saudacao, Contador, MudarCor, Calculadora), em vez de um único arquivo?",
-    options: [
-      "A) Componentes deixam o projeto mais lento",
-      "B) Cada componente cuida da sua própria parte da interface e do seu próprio estado, de forma isolada e reutilizável",
-      "C) É a única forma de usar CSS no React",
-      "D) Componentes eliminam a necessidade de useState"
+      "(A) Sim, pois sem eletricidade e memória digital é impossível existir um banco de dados.",
+      "(B) Não, pois o banco de dados nasce da necessidade ancestral humana de registrar e recuperar informações",
+      "(C) Sim, foi criado pela IBM em 1970 junto com a linguagem SQL.",
+      "(D) Não, foi criado nos anos 1960 exclusivamente para rodar em discos magnéticos."
     ],
     correct: 1,
-    explanation: "A arquitetura baseada em componentes promove a modularidade e a responsabilidade única. Cada bloco isola sua lógica, estilos e estado interno, o que torna o código muito mais organizado, testável e reutilizável em diferentes partes da aplicação."
+    explanation: "aO conceito de banco de dados antecede o computador. Pinturas rupestres (registrando caça) e hieróglifos egípcios (registrando colheitas e impostos do Faraó) já eram formas primitivas de armazenamento e recuperação de dados"
   },
+  [
   {
-    question: "15. O que acontece na tela quando chamamos setContador(contador + 1) dentro de Contador.jsx?",
+    question: "6. O Sistema Gerenciador de Banco de Dados (SGBD) foi criado para resolver as limitações e problemas do modelo de arquivos isolados. Qual das opções a seguir define corretamente o que é um SGBD e apresenta três de seus principais benefícios?",
     options: [
-      "A) Nada muda até a página ser recarregada",
-      "B) É preciso chamar document.getElementById depois, manualmente",
-      "C) O React atualiza o estado e re-renderiza automaticamente o componente com o novo valor",
-      "D) O componente é destruído e recriado do zero"
+      "A) É um hardware especializado para armazenamento físico de dados. Benefícios: maior velocidade de processamento, consumo reduzido de energia e dispensa do uso de backups.",
+      "B) É um software de aplicação final utilizado diretamente pelo usuário para criar planilhas. Benefícios: automatização de fórmulas, geração de gráficos 3D e impressão rápida.",
+      "C) É uma camada de software centralizada responsável por gerenciar, organizar, controlar e proteger o acesso à base de dados. Benefícios: controle de acesso e segurança, garantia de integridade dos dados e controle de concorrência.",
+      "D) É uma linguagem de programação usada para desenvolver interfaces web. Benefícios: suporte a componentes gráficos, facilidade na estilização CSS e integração nativa com navegadores."
     ],
     correct: 2,
-    explanation: "Chamar a função modificadora obtida via useState sinaliza ao React que aquele estado mudou. O React então calcula a diferença no Virtual DOM e re-renderiza eficientemente a parte da tela que depende desse valor."
+    explanation: "O SGBD isola a aplicação da complexidade do armazenamento físico, permitindo que múltiplos sistemas e usuários acessem uma base unificada com segurança, consistência, controle de concorrência e facilidade de backup/recuperação."
   },
   {
-    question: "16. Se o componente Contador fosse usado duas vezes na página (<Contador /><Contador />), o que aconteceria com o estado de cada um?",
+    question: "7. Qual é a diferença entre \"Dado\" e \"Informação\"?",
     options: [
-      "A) Os dois compartilhariam o mesmo valor de contador",
-      "B) Isso causaria um erro, pois um componente só pode ser usado uma vez",
-      "C) O segundo Contador sobrescreveria o primeiro",
-      "D) Cada instância do componente teria seu próprio estado, independente da outra"
-    ],
-    correct: 3,
-    explanation: "Os estados criados com useState pertencem à instância específica do componente na árvore de renderização. Usar duas tags <Contador/> cria duas instâncias isoladas no DOM, permitindo que cada uma mantenha suas próprias variáveis sem interferir na outra."
-  },
-  {
-    question: "17. O que é o JSX usado dentro dos componentes (ex: <section className=\"card\">...</section>)?",
-    options: [
-      "A) Uma sintaxe que permite escrever algo parecido com HTML dentro do próprio código JavaScript",
-      "B) Uma linguagem de template separada do JavaScript, como o Handlebars",
-      "C) Um arquivo de configuração do Vite",
-      "D) Um tipo de CSS especial do React"
-    ],
-    correct: 0,
-    explanation: "O JSX (JavaScript XML) é uma extensão de sintaxe para JS. Ele permite descrever como a interface gráfica deve parecer usando uma marcação idêntica ao HTML, que ferramentas como Vite/Babel transformam internamente em chamadas de funções JavaScript."
-  },
-  {
-    question: "18. Por que o useState de corAzul em MudarCor.jsx começa como false, e não true?",
-    options: [
-      "A) Porque false sempre é o padrão de qualquer useState",
-      "B) Para reproduzir o comportamento original: o primeiro clique é que deixava o texto azul",
-      "C) Porque o React não aceita true como valor inicial de booleano",
-      "D) Não faz diferença, é uma escolha aleatória"
+      "A) Dado é o resultado de uma consulta SQL; Informação é o valor digitado pelo usuário.",
+      "B) Dado é um elemento bruto e sem contexto; Informação é o dado processado e contextualizado com valor de negócio.",
+      "C) Não há diferença, ambos representam a mesma coisa na modelagem.",
+      "D) Dado é armazenado em arquivo físico; Informação é armazenada em banco relacional."
     ],
     correct: 1,
-    explanation: "O estado inicial passado para o useState define o estado do componente na primeira renderização. Como a aplicação começava com a cor padrão do texto e exigia a ação de um clique para mudar para azul, o valor booleano inicial precisava ser false."
+    explanation: "O número 10 isolado é apenas um dado bruto. Dizer \"O cliente comprou 10 unidades do produto P01 no dia 10/08\" transforma o dado em informação com significado."
   },
   {
-    question: "19. Qual é a função do <React.StrictMode> em torno de <App /> no arquivo main.jsx?",
+    question: "8. No Diagrama Entidade-Relacionamento (DER) de Peter Chen, como são representados graficamente as Entidades, os Relacionamentos e os Atributos?",
     options: [
-      "A) Deixa a aplicação mais rápida em produção",
-      "B) É obrigatório para o CSS funcionar",
-      "C) Ajuda a detectar problemas durante o desenvolvimento, sem afetar o que o usuário final vê",
-      "D) Substitui a necessidade do ReactDOM.createRoot"
-    ],
-    correct: 2,
-    explanation: "O StrictMode é um wrapper utilitário exclusivo para o ambiente de desenvolvimento. Ele não renderiza interface visível, mas ativa verificações e avisos adicionais no console para detectar potenciais falhas."
-  },
-  {
-    question: "20. O que a função handleClick faz dentro de Saudacao.jsx?",
-    options: [
-      "A) Cria um novo componente Saudacao",
-      "B) Modifica diretamente o texto no DOM com textContent",
-      "C) Reinicia o valor de nome para \"\"",
-      "D) Verifica se o campo nome está vazio e atualiza a mensagem de acordo, usando setMensagem"
-    ],
-    correct: 3,
-    explanation: "Em manipuladores de eventos do React, a função lê o estado atual dos dados (o valor digitado no input nome), aplica a lógica de validação necessária e atualiza o estado correspondente da interface com o resultado final via setMensagem."
-  },
-  {
-    question: "21. Qual comando de terminal cria a estrutura inicial do projeto com Vite e o template de React?",
-    options: [
-      "A) npm install react",
-      "B) npm create vite@latest meu-primeiro-javascript-react -- --template react",
-      "C) node create-react-app",
-      "D) npm run build react"
+      "A) Entidades = Círculos | Relacionamentos = Retângulos | Atributos = Losangos",
+      "B) Entidades = Retângulos | Relacionamentos = Losangos | Atributos = Elipses/Círculos",
+      "C) Entidades = Tabelas | Relacionamentos = Chaves | Atributos = Linhas",
+      "D) Entidades = Losangos | Relacionamentos = Triângulos | Atributos = Quadrados"
     ],
     correct: 1,
-    explanation: "O pacote create-vite utiliza essa sintaxe de comando. A flag --template react instrui a ferramenta a scaffoldar diretamente uma estrutura pré-configurada para React com JavaScript."
+    explanation: "Na notação clássica de Chen, os retângulos representam os objetos de negócio (Entidades), os losangos representam as ações/conexões (Relacionamentos) e as elipses/bolinhas contêm os dados (Atributos)."
   },
   {
-    question: "22. Na estrutura final do projeto, onde ficam os arquivos dos quatro componentes (Saudacao.jsx, Contador.jsx, MudarCor.jsx, Calculadora.jsx)?",
+    question: "9. O que é um Atributo Derivado?",
     options: [
-      "A) Direto na raiz do projeto",
-      "B) Dentro de public/",
-      "C) Dentro de src/components/",
-      "D) Dentro de index.html"
+      "A) Um atributo que contém subpartes como Rua, Número e Bairro.",
+      "B) Um atributo que aceita múltiplos valores para o mesmo usuário.",
+      "C) Um atributo cujo valor pode ser calculado a partir de outro dado.",
+      "D) Um atributo que identifica unicamente a linha da tabela."
     ],
     correct: 2,
-    explanation: "Por convenção nas aplicações React, os componentes da interface são agrupados dentro de uma pasta dedicada chamada components situada no diretório do código-fonte (src/)."
+    explanation: "Atributos derivados não precisam ser gravados no banco para não gerar redundância. Exemplo: a Idade pode ser calculada instantaneamente subtraindo a Data_Nascimento da data atual."
   },
   {
-    question: "23. Qual é o papel do arquivo App.jsx no projeto final?",
+    question: "10. Na cardinalidade de um relacionamento, o que representam a Cardinalidade Mínima e a Cardinalidade Máxima?",
     options: [
-      "A) Importar e organizar os quatro componentes dentro do header, main e footer da página",
-      "B) Substituir o arquivo style.css",
-      "C) Executar o servidor de desenvolvimento do Vite",
-      "D) Guardar a configuração do npm"
-    ],
-    correct: 0,
-    explanation: "O App.jsx atua como o componente raiz (ou container principal). Ele agrega e organiza a hierarquia de todos os subcomponentes dentro da estrutura semântica da página."
-  },
-  {
-    question: "24. No Calculadora.jsx, o que o objeto contas armazena dentro da função calcular?",
-    options: [
-      "A) O histórico de todos os cálculos já feitos",
-      "B) Os valores digitados antes de serem convertidos para número",
-      "C) As mensagens de erro da calculadora",
-      "D) O resultado das quatro operações (soma, subtracao, multiplicacao, divisao) já calculadas"
-    ],
-    correct: 3,
-    explanation: "O objeto mapeia cada tipo de operação para seu cálculo numérico equivalente, facilitando a seleção direta do resultado correto de acordo com o botão clicado pelo usuário."
-  },
-  {
-    question: "25. O que acontece na Calculadora.jsx se numero1 ou numero2 estiverem vazios quando um botão de operação é clicado?",
-    options: [
-      "A) O resultado exibido é \"Preencha os dois campos!\" e a função para com return",
-      "B) O React trava e mostra um erro na tela",
-      "C) O cálculo é feito considerando o valor vazio como zero",
-      "D) Nada acontece, o botão fica desabilitado"
-    ],
-    correct: 0,
-    explanation: "Uma validação prévia verifica se algum dos inputs está em branco. Se a condição for atendida, ela atualiza a mensagem com um aviso amigável e executa um return para interromper o processamento das operações matemáticas."
-  },
-  {
-    question: "26. O que acontece se o usuário tentar dividir por zero na Calculadora.jsx?",
-    options: [
-      "A) O resultado exibido é Infinity",
-      "B) A função mostra \"Não é possível dividir por zero!\" e interrompe o cálculo",
-      "C) A aplicação para de funcionar",
-      "D) O React converte automaticamente para zero"
+      "A) Mínima = quantidade de colunas; Máxima = quantidade de tabelas.",
+      "B) Mínima = participação opcional (0) ou obrigatória (1); Máxima = limite de conexões (1 ou N).",
+      "C) Mínima = quantidade de chaves primárias; Máxima = quantidade de chaves estrangeiras.",
+      "D) Mínima = número de caracteres do texto; Máxima = tamanho do campo inteiro."
     ],
     correct: 1,
-    explanation: "Para evitar resultados matematicamente inválidos (como Infinity ou NaN), a função inclui uma verificação lógica específica para a operação de divisão quando o segundo número é 0."
+    explanation: "A cardinalidade mínima (0 ou 1) diz se a instância precisa obrigatoriamente participar do relacionamento; a máxima (1 ou N) define se ela pode se conectar com apenas uma ou com várias instâncias."
   },
   {
-    question: "27. Qual arquivo é o \"ponto de entrada\" que conecta o React ao HTML da página (o <div id=\"root\">)?",
+    question: "11. No modelamento de dados, alguns atributos exigem atenção especial por violarem a regra de atomicidade das tabelas se não forem devidamente tratados na migração para o modelo lógico. Qual opção define corretamente um Atributo Multivalorado e apresenta um exemplo prático de um contexto de negócio?",
     options: [
-      "A) src/App.jsx",
-      "B) src/style.css",
-      "C) src/main.jsx",
-      "D) vite.config.js"
+      "A) É aquele que não pode conter nenhum valor nulo no banco de dados. Exemplo: O atributo CPF na entidade PESSOA.",
+      "B) É aquele que pode possuir mais de um valor associado a uma única instância de entidade. Exemplo: O atributo TELEFONE na entidade CLIENTE, pois um cliente pode ter telefone residencial, celular e de recado.",
+      "C) É aquele cujo valor é obtido a partir do cálculo de outro atributo. Exemplo: O atributo IDADE calculado a partir da DATA_NASCIMENTO.",
+      "D) É aquele composto por várias partes independentes que formam um único dado. Exemplo: O atributo ENDEREÇO dividido em RUA, NÚMERO e CEP."
     ],
-    correct: 2,
-    explanation: "O main.jsx é referenciado na tag <script> do index.html. É nele que a inicialização do React ocorre, ligando a raiz da aplicação React ao nó DOM nativo identificável por #root."
-  },
-  {
-    question: "28. O que faz a linha ReactDOM.createRoot(document.getElementById(\"root\")).render(...)?",
-    options: [
-      "A) Cria uma raiz do React na div #root e manda renderizar o componente informado dentro dela",
-      "B) Cria um novo arquivo HTML",
-      "C) Instala as dependências do projeto",
-      "D) Compila o CSS do projeto"
-    ],
-    correct: 0,
-    explanation: "O método createRoot estabelece o contêiner React associado ao elemento do DOM nativo (#root), enquanto o método .render() instrui a árvore de componentes a ser processada e desenhada na tela dentro dessa raiz."
-  },
-  {
-    question: "29. Por que o style.css não precisou de nenhuma alteração ao migrar o projeto para React?",
-    options: [
-      "A) Porque o React ignora arquivos CSS",
-      "B) Porque o CSS foi convertido automaticamente pelo Vite",
-      "C) Porque os componentes preservaram as mesmas classes e ids (.card, #contador, #textoCor) usados pelo CSS original",
-      "D) Porque o projeto não usa mais estilos"
-    ],
-    correct: 2,
-    explanation: "Os seletores do CSS combinam com atributos do DOM (class e id). Como o JSX dos componentes React continuou emitindo os mesmos className e id na estrutura HTML final, as regras contidas em style.css mantiveram a mesma compatibilidade sem adaptações."
-  },
-  {
-    question: "30. Antes de entregar o projeto, qual comando deve ser rodado para gerar a versão final e verificar se algo está quebrado?",
-    options: [
-      "A) npm run dev",
-      "B) npm install react",
-      "C) npm create vite",
-      "D) npm run build"
-    ],
-    correct: 3,
-    explanation: "O comando npm run build executa o bundler (Vite) para compilar, minificar e otimizar o código em arquivos estáticos prontos para produção. Ele também executa checagens no código para garantir que não há erros de compilação ou sintaxe."
+    correct: 1,
+    explanation: "Atributos multivalorados (como telefone ou e-mail) permitem múltiplos valores para um único registro, exigindo a criação de uma nova tabela associada no modelo lógico para manter a 1ª Forma Normal (1FN) e a atomicidade dos dados."
   }
+]
+[
+  {
+    question: "12. Na conversão do Modelo Conceitual para o Modelo Lógico, qual é a regra básica para transformar Entidades, Atributos e Identificadores?",
+    options: [
+      "A) Entidade -> Coluna | Atributo -> Tabela | Identificador -> Chave Estrangeira",
+      "B) Entidade -> Tabela | Atributo -> Coluna | Identificador -> Chave Primária (PK)",
+      "C) Entidade -> Banco | Atributo -> Registro | Identificador -> Índice",
+      "D) Entidade -> Schema | Atributo -> DDL | Identificador -> Constraints"
+    ],
+    correct: 1,
+    explanation: "Esta é a regra clássica de transposição: cada objeto vira uma Tabela, cada característica vira uma Coluna dessa tabela e o identificador vira a Chave Primária (PK) que garante a unicidade."
+  },
+  {
+    question: "13. Como deve ser mapeado no modelo lógico um relacionamento de cardinalidade 1:N (Um-para-Muitos), como entre DEPARTAMENTO (1) e FUNCIONARIO (N)?",
+    options: [
+      "A) Cria-se uma nova tabela intermediária com as duas chaves primárias.",
+      "B) A Chave Estrangeira (FK) obrigatoriamente vai para a tabela do lado N (FUNCIONARIO).",
+      "C) A Chave Estrangeira (FK) obrigatoriamente vai para a tabela do lado 1 (DEPARTAMENTO).",
+      "D) Não se utiliza chave estrangeira em relacionamentos 1:N."
+    ],
+    correct: 1,
+    explanation: "No relacionamento 1:N, para evitar a duplicação de linhas no lado '1', a Chave Primária da tabela pai (lado 1) é herdada como Chave Estrangeira (FK) na tabela filho (lado N)."
+  },
+  {
+    question: "14. O que acontece ao mapear um relacionamento N:M (Muitos-para-Muitos) do modelo conceitual para o lógico?",
+    options: [
+      "A) A FK é colocada em qualquer uma das duas tabelas originais.",
+      "B) Gera-se obrigatoriamente uma nova Tabela Associativa com a PK composta pelas FKs das duas tabelas.",
+      "C) O relacionamento é descartado pois bancos relacionais não suportam cardinalidade N:M.",
+      "D) Os atributos de uma tabela são copiados integralmente para a outra tabela."
+    ],
+    correct: 1,
+    explanation: "Bancos relacionais não conseguem ligar diretamente duas tabelas em relação N:M. Cria-se uma tabela de ligação no meio, transformando o relacionamento em dois relacionamentos 1:N."
+  },
+  {
+    question: "15. Se o modelo conceitual tiver um Atributo Multivalorado (ex: TELEFONE na entidade CLIENTE), como ele é representado no modelo lógico?",
+    options: [
+      "A) Vira uma coluna do tipo texto contendo todos os telefones separados por vírgula na mesma célula.",
+      "B) Vira uma nova tabela auxiliar dedicada com a sua própria PK e uma FK referenciando a tabela CLIENTE.",
+      "C) É eliminado da modelagem por não ser um valor atômico.",
+      "D) Permanece como atributo composto dentro da própria tabela CLIENTE."
+    ],
+    correct: 1,
+    explanation: "Tentar colocar múltiplos valores em um único campo violaria a 1ª Forma Normal. A solução relacional é criar uma tabela auxiliar (ex: TELEFONE) apontando para o cliente via FK."
+  },
+  {
+    question: "16. Considere o seguinte cenário: 'Um PROFESSOR (id_prof, nome) ministra várias DISCIPLINAS (id_disc, nome), e uma DISCIPLINA pode ser ministrada por vários PROFESSORES. O sistema grava o semestre em que o professor ministrou a disciplina.' Qual é a estrutura do Modelo Lógico correto resultante dessa relação?",
+    options: [
+      "A) PROFESSOR (PK id_prof, nome, FK id_disc) | DISCIPLINA (PK id_disc, nome, semestre)",
+      "B) PROFESSOR (PK id_prof, nome) | DISCIPLINA (PK id_disc, nome, FK id_prof, semestre)",
+      "C) PROFESSOR (PK id_prof, nome) | DISCIPLINA (PK id_disc, nome) | MINISTRA (PK/FK id_prof, PK/FK id_disc, semestre)",
+      "D) PROFESSOR_DISCIPLINA (PK id_prof, PK id_disc, nome_prof, nome_disc, semestre)"
+    ],
+    correct: 2,
+    explanation: "Como a relação é de cardinalidade Muitos-para-Muitos (N:M), é obrigatório criar uma tabela associativa (MINISTRA ou PROFESSOR_DISCIPLINA). A Chave Primária dessa tabela é composta pelas duas Chaves Estrangeiras (id_prof e id_disc), e o atributo da relação (semestre) passa a ser uma coluna nessa nova tabela."
+  }
+]
+[
+  {
+    question: "17. Qual é a regra mandatória para que uma tabela esteja na Primeira Forma Normal (1FN)?",
+    options: [
+      "A) Não possuir chaves primárias compostas.",
+      "B) Não possuir dependências transitivas entre atributos não-chave.",
+      "C) Todos os atributos devem possuir valores atômicos (indivisíveis) e não existir grupos repetitivos.",
+      "D) Todos os determinantes devem ser chaves candidatas."
+    ],
+    correct: 2,
+    explanation: "A 1FN garante a atomicidade dos dados: cada célula armazena apenas um único valor e não existem colunas repetidas (como Tel1, Tel2, Tel3)."
+  },
+  {
+    question: "18. Quando uma tabela que já está na 1FN viola a Segunda Forma Normal (2FN)?",
+    options: [
+      "A) Quando possui campos do tipo texto com mais de 255 caracteres.",
+      "B) Quando possui uma chave primária composta e um atributo não-chave depende de apenas UMA PARTE dessa chave.",
+      "C) Quando não possui chave estrangeira cadastrada.",
+      "D) Quando um atributo não-chave depende de outro atributo não-chave."
+    ],
+    correct: 1,
+    explanation: "A 2FN ataca a 'Dependência Parcial'. Se a chave é composta por (A+B), todos os outros atributos devem depender de (A+B) juntos, e não apenas de A ou apenas de B."
+  },
+  {
+    question: "19. O que é uma Dependência Transitiva (que é proibida na Terceira Forma Normal - 3FN)?",
+    options: [
+      "A) Quando uma coluna do tipo data depende do horário do sistema.",
+      "B) Quando um atributo não-chave depende de outro atributo que também NÃO é chave na tabela.",
+      "C) Quando a chave primária muda de valor durante uma transação.",
+      "D) Quando uma chave estrangeira aponta para uma tabela inexistente."
+    ],
+    correct: 1,
+    explanation: "Na 3FN, todos os atributos não-chave devem depender direta e exclusivamente da Chave Primária. Se Nome_Cliente depende de Cod_Cliente, e Cod_Cliente está solto em uma tabela de PEDIDO, há dependência transitiva."
+  },
+  {
+    question: "20. Dada a tabela não-normalizada de Vendas abaixo: TABELA_PEDIDO (NumPedido, DataPedido, CodCliente, NomeCliente, UF). Qual Forma Normal está sendo violada e qual é a solução normalizada correta para este banco de dados?",
+    options: [
+      "A) Viola a 1ª Forma Normal (1FN). Solução: Unir todas as colunas em um único campo de texto separado por vírgulas.",
+      "B) Viola a 2ª Forma Normal (2FN). Solução: Criar uma tabela separada para UF contendo todas as cidades do país.",
+      "C) Viola a 3ª Forma Normal (3FN), pois NomeCliente e UF dependem do CodCliente (dependência transitiva) e não da chave primária NumPedido. Solução: CLIENTE (PK CodCliente, NomeCliente, UF) e PEDIDO (PK NumPedido, DataPedido, FK CodCliente).",
+      "D) Não há nenhuma violação; a tabela já se encontra perfeitamente normalizada."
+    ],
+    correct: 2,
+    explanation: "Os atributos NomeCliente e UF dependem diretamente de CodCliente, e não da PK NumPedido. Essa dependência transitiva viola a 3FN. Ao isolar os dados do cliente em sua própria tabela, elimina-se a redundância de repetir o nome e a UF a cada novo pedido realizado."
+  },
+  {
+    question: "21. Qual é a diferença prática de armazenamento entre os tipos de dados CHAR(20) e VARCHAR(20) no MySQL?",
+    options: [
+      "A) CHAR armazena apenas números; VARCHAR armazena letras e números.",
+      "B) CHAR(20) ocupa sempre 20 bytes fixos na memória; VARCHAR(20) ocupa apenas o tamanho do texto digitado (até 20).",
+      "C) VARCHAR aceita apenas letras maiúsculas; CHAR aceita minúsculas.",
+      "D) Não há diferença prática, ambos alocam a memória de forma idêntica."
+    ],
+    correct: 1,
+    explanation: "CHAR é de tamanho estático (se gravar 'Ana', usará os 20 espaços). VARCHAR é de tamanho dinâmico (se gravar 'Ana', usará apenas 3 bytes + byte de controle)."
+  },
+  {
+    question: "22. Qual comando DDL é utilizado para alterar a estrutura de uma tabela já existente (como adicionar ou excluir uma coluna)?",
+    options: [
+      "A) UPDATE TABLE",
+      "B) MODIFY TABLE",
+      "C) ALTER TABLE",
+      "D) CHANGE TABLE"
+    ],
+    correct: 2,
+    explanation: "O comando DDL ALTER TABLE é o padrão SQL para modificar a definição de uma tabela (ex.: ADD para criar coluna, DROP COLUMN para remover)."
+  },
+  {
+    question: "23. Para apagar completamente uma tabela e todos os seus dados de forma permanente do banco de dados, qual comando DDL deve ser executado?",
+    options: [
+      "A) DELETE FROM nome_tabela;",
+      "B) REMOVE TABLE nome_tabela;",
+      "C) DROP TABLE nome_tabela;",
+      "D) ERASE TABLE nome_tabela;"
+    ],
+    correct: 2,
+    explanation: "O comando DDL DROP TABLE remove a tabela e toda a sua estrutura do dicionário de dados do banco. Já o DELETE é um comando DML que apaga apenas as linhas."
+  }
+]
+[
+  {
+    question: "24. Escreva o script SQL DDL para criar o banco de dados chamado SISTEMA_FACULDADE e em seguida selecione-o para uso.",
+    type: "script",
+    expectedCode: "CREATE DATABASE SISTEMA_FACULDADE;\nUSE SISTEMA_FACULDADE;",
+    keywords: ["CREATE DATABASE", "SISTEMA_FACULDADE", "USE"],
+    explanation: "O comando CREATE DATABASE cria o ambiente de armazenamento do banco de dados e o USE altera o contexto da sessão, informando ao MySQL qual base receberá os próximos comandos SQL."
+  },
+  {
+    question: "25. Escreva o script SQL DDL completo para criar a tabela CURSO contendo:\n- id_curso: inteiro, auto-incremento, Chave Primária\n- nome_curso: texto de até 100 caracteres, obrigatório\n- sigla: texto de 5 caracteres, valor único\n- valor_mensalidade: decimal com 8 dígitos no total e 2 casas decimais.",
+    type: "script",
+    expectedCode: "CREATE TABLE CURSO (\n    id_curso INT AUTO_INCREMENT PRIMARY KEY,\n    nome_curso VARCHAR(100) NOT NULL,\n    sigla VARCHAR(5) UNIQUE,\n    valor_mensalidade DECIMAL(8,2)\n);",
+    keywords: ["CREATE TABLE", "CURSO", "AUTO_INCREMENT", "PRIMARY KEY", "NOT NULL", "UNIQUE", "DECIMAL(8,2)"],
+    explanation: "INT AUTO_INCREMENT PRIMARY KEY define o identificador mestre numérico automático. VARCHAR(100) NOT NULL cria a coluna obrigatória. UNIQUE garante a unicidade da sigla e DECIMAL(8,2) configura a precisão monetária de ponto fixo."
+  },
+  {
+    question: "26. Escreva o script SQL DDL para criar a tabela ALUNO conectando-a à tabela CURSO através de uma Chave Estrangeira (FK):\n- rgm: inteiro, Chave Primária\n- nome_aluno: texto de até 80 caracteres, obrigatório\n- id_curso: inteiro, obrigatório\n- Restrição de Chave Estrangeira com o nome 'fk_aluno_curso'.",
+    type: "script",
+    expectedCode: "CREATE TABLE ALUNO (\n    rgm INT PRIMARY KEY,\n    nome_aluno VARCHAR(80) NOT NULL,\n    id_curso INT NOT NULL,\n    CONSTRAINT fk_aluno_curso FOREIGN KEY (id_curso) REFERENCES CURSO(id_curso)\n);",
+    keywords: ["CREATE TABLE", "ALUNO", "PRIMARY KEY", "CONSTRAINT", "fk_aluno_curso", "FOREIGN KEY", "REFERENCES"],
+    explanation: "A sintaxe CONSTRAINT fk_aluno_curso FOREIGN KEY (id_curso) REFERENCES CURSO(id_curso) estabelece a regra de integridade referencial física, impedindo o cadastro de alunos vinculados a cursos inexistentes."
+  },
+  {
+    question: "27. Escreva o comando SQL DDL para adicionar a coluna email (texto até 60 caracteres, valor único) na tabela ALUNO criada anteriormente.",
+    type: "script",
+    expectedCode: "ALTER TABLE ALUNO ADD email VARCHAR(60) UNIQUE;",
+    keywords: ["ALTER TABLE", "ALUNO", "ADD", "email", "VARCHAR(60)", "UNIQUE"],
+    explanation: "O comando DDL ALTER TABLE juntamente com a instrução ADD permite modificar a estrutura de uma tabela existente adicionando novos campos e constraints sem apagar os dados existentes."
+  }
+]
 ];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-const questionText = document.getElementById("question-text");
-const optionsContainer = document.getElementById("options-container");
-const explanationBox = document.getElementById("explanation-box");
-const explanationText = document.getElementById("explanation-text");
-const nextBtn = document.getElementById("next-btn");
-const currentQuestionSpan = document.getElementById("current-question");
-const totalQuestionsSpan = document.getElementById("total-questions");
-const quizScreen = document.getElementById("quiz-screen");
-const resultScreen = document.getElementById("result-screen");
-const scoreSpan = document.getElementById("score");
-const scoreTotalSpan = document.getElementById("score-total");
-const restartBtn = document.getElementById("restart-btn");
-const resetInQuizBtn = document.getElementById("reset-in-quiz-btn");
-
-if (nextBtn) nextBtn.addEventListener("click", handleNextQuestion);
-if (restartBtn) restartBtn.addEventListener("click", restartQuiz);
-if (resetInQuizBtn) resetInQuizBtn.addEventListener("click", restartQuiz);
-
-function loadProgress() {
-  const savedIndex = localStorage.getItem("quiz_current_index");
-  const savedScore = localStorage.getItem("quiz_score");
-
-  if (savedIndex !== null && savedScore !== null) {
-    const parsedIndex = parseInt(savedIndex, 10);
-    const parsedScore = parseInt(savedScore, 10);
-
-    if (parsedIndex >= questions.length || isNaN(parsedIndex)) {
-      resetProgress();
-    } else {
-      currentQuestionIndex = parsedIndex;
-      score = isNaN(parsedScore) ? 0 : parsedScore;
-    }
-  }
-}
 
 function saveProgress() {
   localStorage.setItem("quiz_current_index", currentQuestionIndex);
