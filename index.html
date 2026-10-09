@@ -3,56 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz de Estudo de BD</title>
+  <title>Quiz de Estudo - React</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
- <div class="quiz-card">
-  <h2>O banco de dados não nasce com o computador, nasce da necessidade humana de registrar, guardar e recuperar informações.   </h2>
-  <nav class="nav-switcher">
-  <a href="index.html" class="nav-tab active">Quiz</a>
-  <a href="blogestudo.html" class="nav-tab">Conteúdo e Vídeos</a>
-</nav>
+  <main class="quiz-container">
+    <header class="quiz-header">
+      <span id="question-count">Pergunta 1 de 30</span>
+      <button id="restart-btn" class="secondary-btn">Reiniciar</button>
+    </header>
 
-  <div id="quiz-screen">
-    <div class="quiz-header">
-      <p class="progress-info">
-        Pergunta <span id="current-question">1</span> de <span id="total-questions">30</span>
-      </p>
-      <button id="reset-in-quiz-btn" class="btn-text">Reiniciar</button>
-    </div>
-
-    <h2 id="question-text" class="question-title"></h2>
-
-    <div id="options-container" class="options-list"></div>
-
-    <div id="explanation-box" class="explanation-box hidden">
-      <h3>Explicação:</h3>
-      <p id="explanation-text"></p>
-    </div>
-
-    <div class="action-container">
-      <button id="next-btn" class="btn-primary hidden" disabled>Próxima Pergunta</button>
-    </div>
-  </div>
-
-</div>
-        <button id="next-btn" class="btn-primary hidden" disabled>Próxima Pergunta</button>
+    <section id="quiz-body" class="quiz-body">
+      <h2 id="question-title" class="question-title">Carregando pergunta...</h2>
+      
+      <div id="options-container" class="options-container">
       </div>
-    </div>
-    <div id="result-screen" class="hidden">
-      <h2>Resultado Final</h2>
-      <p class="result-score">
-        Você acertou <span id="score">0</span> de <span id="score-total">0</span> perguntas!
-      </p>
-      <button id="restart-btn" class="btn-primary">Reiniciar Quiz</button>
-    </div>
 
-  </div>
+      <div id="explanation-box" class="explanation-box hidden">
+        <h3>💡 Explicação:</h3>
+        <p id="explanation-text"></p>
+        <button id="next-btn" class="primary-btn">Próxima Pergunta</button>
+      </div>
+    </section>
 
-  <script src="questions.js"></script>
+    <section id="result-screen" class="result-screen hidden">
+      <h2>🎉 Quiz Concluído!</h2>
+      <p id="final-score" class="score-text"></p>
+      
+      <div id="study-recommendation" class="recommendation-box">
+      </div>
+
+      <button id="restart-quiz-btn" class="primary-btn">Tentar Novamente</button>
+    </section>
+  </main>
+
   <script src="script.js"></script>
-  <script src="blogestudos.html"></script>
 </body>
 </html>

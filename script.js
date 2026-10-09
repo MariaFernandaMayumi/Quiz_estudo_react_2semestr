@@ -1,355 +1,484 @@
+const TOPICOS_ESTUDO = {
+  DOM_IMPERATIVO_VS_DECLARATIVO: {
+    nome: "Manipulação do DOM: JavaScript Puro vs. React",
+    descricao: "Revise seletores nativos (getElementById), addEventListener e a diferença do modelo declarativo com estado no React."
+  },
+  SINTAXE_JSX: {
+    nome: "Sintaxe e Estrutura do JSX",
+    descricao: "Revise regras do JSX (className, htmlFor e estilos inline com objetos style={{ color: 'blue' }})."
+  },
+  HOOK_USESTATE: {
+    nome: "O Hook useState (Estado)",
+    descricao: "Revise a sintaxe do useState, retorno em array [valor, setValor] e como a reatividade/re-renderização funciona."
+  },
+  COMPONENTES_E_ESTRUTURA: {
+    nome: "Componentes e Organização de Projetos React",
+    descricao: "Revise a modularização de componentes, pasta src/components, main.jsx (createRoot), App.jsx e React.StrictMode."
+  },
+  INPUTS_E_EVENTOS: {
+    nome: "Inputs Controlados e Manipulação de Eventos",
+    descricao: "Revise componentes controlados (value + onChange), tratamento de cliques e validações de lógica/conversão de tipos."
+  },
+  ECOSSISTEMA_CSS_TOOLS: {
+    nome: "CSS e Ferramentas do Ecossistema (Vite / NPM)",
+    descricao: "Revise reaproveitamento de CSS com className/id e comandos do terminal (npm create vite, npm run build, etc.)."
+  }
+};
 const questions = [
- {
-    question: "1. O conceito de banco de dados nasceu junto com a invenção dos computadores eletrônicos no século XX?",
+  {
+    question: "1. No JavaScript puro, como o script original pegava um elemento da página para manipulá-lo (ex: o botão de saudação)?",
+    options: ["A) document.getElementById(\"btnSaudacao\")", "B) useState(\"btnSaudacao\")", "C) <button id=\"btnSaudacao\">", "D) React.createElement(\"button\")"],
+    correct: 0,
+    topic: "DOM_IMPERATIVO_VS_DECLARATIVO",
+    explanation: "No JS puro, o método document.getElementById() é o padrão para selecionar elementos pelo atributo id."
+  },
+  {
+    question: "2. No script.js original, qual propriedade era usada para trocar o texto exibido na tela (ex: a mensagem de saudação)?",
+    options: ["A) element.value", "B) element.textContent", "C) element.innerHTML.render()", "D) setMensagem()"],
+    correct: 1,
+    topic: "DOM_IMPERATIVO_VS_DECLARATIVO",
+    explanation: "A propriedade textContent altera o conteúdo de texto puro de um elemento no DOM nativo."
+  },
+  {
+    question: "3. Como um clique de botão era tratado no JavaScript puro do projeto original?",
+    options: ["A) onClick={handleClick} dentro do JSX", "B) btn.addEventListener(\"click\", funcao)", "C) btn.onPress(funcao)", "D) useEffect(() => {...}, [])"],
+    correct: 1,
+    topic: "DOM_IMPERATIVO_VS_DECLARATIVO",
+    explanation: "No JS puro, registra-se escutadores de eventos via addEventListener()."
+  },
+  {
+    question: "4. No script.js original, como a cor do texto era alterada diretamente?",
+    options: ["A) texto.style.color = \"blue\"", "B) texto.className = \"azul\"", "C) setCorAzul(true)", "D) texto.color.set(\"blue\")"],
+    correct: 0,
+    topic: "DOM_IMPERATIVO_VS_DECLARATIVO",
+    explanation: "Estilos inline nativos são alterados acessando a propriedade style do elemento DOM."
+  },
+  {
+    question: "5. Qual é a principal diferença de raciocínio entre o JS puro e o React ao atualizar a interface?",
     options: [
-      "(A) Sim, pois sem eletricidade e memória digital é impossível existir um banco de dados.",
-      "(B) Não, pois o banco de dados nasce da necessidade ancestral humana de registrar e recuperar informações",
-      "(C) Sim, foi criado pela IBM em 1970 junto com a linguagem SQL.",
-      "(D) Não, foi criado nos anos 1960 exclusivamente para rodar em discos magnéticos."
+      "A) No JS puro cada ação manipula o DOM diretamente; no React, uma ação atualiza o estado e o React se encarrega de atualizar a tela",
+      "B) No React não existem eventos de clique",
+      "C) No JS puro não é possível usar funções",
+      "D) Não há diferença nenhuma entre os dois"
+    ],
+    correct: 0,
+    topic: "DOM_IMPERATIVO_VS_DECLARATIVO",
+    explanation: "O JS puro é imperativo (altera o DOM diretamente). O React é declarativo (mudanças no estado disparam atualizações da interface)."
+  },
+  {
+    question: "6. No HTML/JSX, o atributo class do HTML puro vira qual atributo dentro de um componente React?",
+    options: ["A) styleClass", "B) className", "C) classes", "D) cssName"],
+    correct: 1,
+    topic: "SINTAXE_JSX",
+    explanation: "Como 'class' é uma palavra reservada no JavaScript, o JSX utiliza 'className'."
+  },
+  {
+    question: "7. Como um estilo inline (ex: cor do texto) é escrito dentro de um componente React, diferente do CSS puro?",
+    options: [
+      "A) style=\"color: blue\" (string, como no HTML)",
+      "B) style={{ color: \"blue\" }} (um objeto JavaScript)",
+      "C) css={color: blue}",
+      "D) colorStyle=\"blue\""
     ],
     correct: 1,
-    explanation: "aO conceito de banco de dados antecede o computador. Pinturas rupestres (registrando caça) e hieróglifos egípcios (registrando colheitas e impostos do Faraó) já eram formas primitivas de armazenamento e recuperação de dados"
-  },
-  [
-  {
-    question: "6. O Sistema Gerenciador de Banco de Dados (SGBD) foi criado para resolver as limitações e problemas do modelo de arquivos isolados. Qual das opções a seguir define corretamente o que é um SGBD e apresenta três de seus principais benefícios?",
-    options: [
-      "A) É um hardware especializado para armazenamento físico de dados. Benefícios: maior velocidade de processamento, consumo reduzido de energia e dispensa do uso de backups.",
-      "B) É um software de aplicação final utilizado diretamente pelo usuário para criar planilhas. Benefícios: automatização de fórmulas, geração de gráficos 3D e impressão rápida.",
-      "C) É uma camada de software centralizada responsável por gerenciar, organizar, controlar e proteger o acesso à base de dados. Benefícios: controle de acesso e segurança, garantia de integridade dos dados e controle de concorrência.",
-      "D) É uma linguagem de programação usada para desenvolver interfaces web. Benefícios: suporte a componentes gráficos, facilidade na estilização CSS e integração nativa com navegadores."
-    ],
-    correct: 2,
-    explanation: "O SGBD isola a aplicação da complexidade do armazenamento físico, permitindo que múltiplos sistemas e usuários acessem uma base unificada com segurança, consistência, controle de concorrência e facilidade de backup/recuperação."
+    topic: "SINTAXE_JSX",
+    explanation: "Em JSX, a propriedade style recebe um objeto JS delimitado por chaves duplas: {{ }}."
   },
   {
-    question: "7. Qual é a diferença entre \"Dado\" e \"Informação\"?",
+    question: "8. No JS puro, uma variável guardava o valor do contador manualmente (ex: let contador = 0). Qual é o equivalente em React?",
+    options: ["A) const contador = 0;", "B) const [contador, setContador] = useState(0);", "C) var contador = new State(0);", "D) props.contador = 0;"],
+    correct: 1,
+    topic: "HOOK_USESTATE",
+    explanation: "A reatividade no React exige o uso do Hook useState para armazenar valores mutáveis que afetam a interface."
+  },
+  {
+    question: "9. No JS puro, o HTML e o JavaScript ficavam em arquivos separados. No React, como o HTML da interface é escrito?",
     options: [
-      "A) Dado é o resultado de uma consulta SQL; Informação é o valor digitado pelo usuário.",
-      "B) Dado é um elemento bruto e sem contexto; Informação é o dado processado e contextualizado com valor de negócio.",
-      "C) Não há diferença, ambos representam a mesma coisa na modelagem.",
-      "D) Dado é armazenado em arquivo físico; Informação é armazenada em banco relacional."
+      "A) Sempre em um arquivo .html separado",
+      "B) Em JSX, misturado com a lógica dentro do próprio componente .jsx",
+      "C) Como uma string dentro de um arquivo .css",
+      "D) React não usa HTML de forma alguma"
     ],
     correct: 1,
-    explanation: "O número 10 isolado é apenas um dado bruto. Dizer \"O cliente comprou 10 unidades do produto P01 no dia 10/08\" transforma o dado em informação com significado."
+    topic: "SINTAXE_JSX",
+    explanation: "O JSX permite combinar marcação de interface e lógica JavaScript no mesmo arquivo de componente."
   },
   {
-    question: "8. No Diagrama Entidade-Relacionamento (DER) de Peter Chen, como são representados graficamente as Entidades, os Relacionamentos e os Atributos?",
+    question: "10. O que aconteceu com o arquivo style.css ao migrar o projeto de JS puro para React?",
     options: [
-      "A) Entidades = Círculos | Relacionamentos = Retângulos | Atributos = Losangos",
-      "B) Entidades = Retângulos | Relacionamentos = Losangos | Atributos = Elipses/Círculos",
-      "C) Entidades = Tabelas | Relacionamentos = Chaves | Atributos = Linhas",
-      "D) Entidades = Losangos | Relacionamentos = Triângulos | Atributos = Quadrados"
+      "A) Foi reescrito inteiramente em JSX",
+      "B) Foi copiado para src/style.css sem nenhuma alteração",
+      "C) Foi transformado em um objeto de estilos JavaScript",
+      "D) Foi removido, pois o React não aceita CSS"
     ],
     correct: 1,
-    explanation: "Na notação clássica de Chen, os retângulos representam os objetos de negócio (Entidades), os losangos representam as ações/conexões (Relacionamentos) e as elipses/bolinhas contêm os dados (Atributos)."
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "CSS tradicional pode ser reutilizado sem alterações bastando importá-lo no componente."
   },
   {
-    question: "9. O que é um Atributo Derivado?",
+    question: "11. O que useState(0) retorna quando chamado dentro de um componente?",
     options: [
-      "A) Um atributo que contém subpartes como Rua, Número e Bairro.",
-      "B) Um atributo que aceita múltiplos valores para o mesmo usuário.",
-      "C) Um atributo cujo valor pode ser calculado a partir de outro dado.",
-      "D) Um atributo que identifica unicamente a linha da tabela."
-    ],
-    correct: 2,
-    explanation: "Atributos derivados não precisam ser gravados no banco para não gerar redundância. Exemplo: a Idade pode ser calculada instantaneamente subtraindo a Data_Nascimento da data atual."
-  },
-  {
-    question: "10. Na cardinalidade de um relacionamento, o que representam a Cardinalidade Mínima e a Cardinalidade Máxima?",
-    options: [
-      "A) Mínima = quantidade de colunas; Máxima = quantidade de tabelas.",
-      "B) Mínima = participação opcional (0) ou obrigatória (1); Máxima = limite de conexões (1 ou N).",
-      "C) Mínima = quantidade de chaves primárias; Máxima = quantidade de chaves estrangeiras.",
-      "D) Mínima = número de caracteres do texto; Máxima = tamanho do campo inteiro."
+      "A) Apenas o número 0",
+      "B) Um array com dois itens: o valor atual e uma função para atualizá-lo",
+      "C) Um componente React",
+      "D) Uma promise"
     ],
     correct: 1,
-    explanation: "A cardinalidade mínima (0 ou 1) diz se a instância precisa obrigatoriamente participar do relacionamento; a máxima (1 ou N) define se ela pode se conectar com apenas uma ou com várias instâncias."
+    topic: "HOOK_USESTATE",
+    explanation: "O useState retorna um array [valorAtual, funcaoAtualizadora]."
   },
   {
-    question: "11. No modelamento de dados, alguns atributos exigem atenção especial por violarem a regra de atomicidade das tabelas se não forem devidamente tratados na migração para o modelo lógico. Qual opção define corretamente um Atributo Multivalorado e apresenta um exemplo prático de um contexto de negócio?",
+    question: "12. Por que os inputs da Calculadora.jsx usam value={numero1} junto com onChange, em vez de deixar o navegador controlar o campo sozinho?",
     options: [
-      "A) É aquele que não pode conter nenhum valor nulo no banco de dados. Exemplo: O atributo CPF na entidade PESSOA.",
-      "B) É aquele que pode possuir mais de um valor associado a uma única instância de entidade. Exemplo: O atributo TELEFONE na entidade CLIENTE, pois um cliente pode ter telefone residencial, celular e de recado.",
-      "C) É aquele cujo valor é obtido a partir do cálculo de outro atributo. Exemplo: O atributo IDADE calculado a partir da DATA_NASCIMENTO.",
-      "D) É aquele composto por várias partes independentes que formam um único dado. Exemplo: O atributo ENDEREÇO dividido em RUA, NÚMERO e CEP."
+      "A) Porque isso é obrigatório em qualquer HTML",
+      "B) Para tornar o input \"controlado\": o valor do campo fica sincronizado com o estado do React",
+      "C) Porque inputs numéricos exigem essa sintaxe especial",
+      "D) Isso apenas melhora a performance visual"
     ],
     correct: 1,
-    explanation: "Atributos multivalorados (como telefone ou e-mail) permitem múltiplos valores para um único registro, exigindo a criação de uma nova tabela associada no modelo lógico para manter a 1ª Forma Normal (1FN) e a atomicidade dos dados."
+    topic: "INPUTS_E_EVENTOS",
+    explanation: "Inputs controlados sincronizam a interface e o estado do React através da combinação de 'value' e 'onChange'."
+  },
+  {
+    question: "13. Por que o id='contador' foi mantido dentro do <p> em Contador.jsx, mesmo já estando dentro de um componente React?",
+    options: [
+      "A) Porque o React exige um id em toda tag <p>",
+      "B) Para que a regra #contador do CSS original continuasse funcionando",
+      "C) Não tem motivo, é só um resquício de código",
+      "D) Porque useState precisa de um id correspondente"
+    ],
+    correct: 1,
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "Os IDs e classes originais foram preservados para manter a compatibilidade com o CSS existente."
+  },
+  {
+    question: "14. Qual é a principal vantagem de dividir a interface em componentes, em vez de um único arquivo?",
+    options: [
+      "A) Cada componente cuida da sua própria parte da interface e do seu próprio estado, de forma isolada e reutilizável",
+      "B) Componentes deixam o projeto mais lento",
+      "C) É a única forma de usar CSS no React",
+      "D) Componentes eliminam a necessidade de useState"
+    ],
+    correct: 0,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "A componentização isola responsabilidades, estados e melhora a manutenibilidade do código."
+  },
+  {
+    question: "15. O que acontece na tela quando chamamos setContador(contador + 1) dentro de Contador.jsx?",
+    options: [
+      "A) Nada muda até a página ser recarregada",
+      "B) O React atualiza o estado e re-renderiza automaticamente o componente com o novo valor",
+      "C) É preciso chamar document.getElementById depois, manualmente",
+      "D) O componente é destruído e recriado do zero"
+    ],
+    correct: 1,
+    topic: "HOOK_USESTATE",
+    explanation: "Chamar a função de atualização do estado notifica o React para realizar a re-renderização com os novos dados."
+  },
+  {
+    question: "16. Se o componente Contador fosse usado duas vezes na página (<Contador /><Contador />), o que aconteceria com o estado de cada um?",
+    options: [
+      "A) Os dois compartilhariam o mesmo valor de contador",
+      "B) Cada instância do componente teria seu próprio estado, independente da outra",
+      "C) Isso causaria um erro, pois um componente só pode ser usado uma vez",
+      "D) O segundo Contador sobrescreveria o primeiro"
+    ],
+    correct: 1,
+    topic: "HOOK_USESTATE",
+    explanation: "Cada instância de um componente no React mantém seu próprio estado de forma totalmente isolada."
+  },
+  {
+    question: "17. O que é o JSX usado dentro dos componentes (ex: <section className=\"card\">...</section>)?",
+    options: [
+      "A) Uma linguagem de template separada do JavaScript, como o Handlebars",
+      "B) Uma sintaxe que permite escrever algo parecido com HTML dentro do próprio código JavaScript",
+      "C) Um arquivo de configuração do Vite",
+      "D) Um tipo de CSS especial do React"
+    ],
+    correct: 1,
+    topic: "SINTAXE_JSX",
+    explanation: "JSX é uma extensão de sintaxe que permite estruturar elementos visuais de forma declarativa dentro do arquivo JS."
+  },
+  {
+    question: "18. Por que o useState de corAzul em MudarCor.jsx começa como false, e não true?",
+    options: [
+      "A) Porque false sempre é o padrão de qualquer useState",
+      "B) Para reproduzir o comportamento original: o primeiro clique é que deixava o texto azul",
+      "C) Porque o React não aceita true como valor inicial de booleano",
+      "D) Não faz diferença, é uma escolha aleatória"
+    ],
+    correct: 1,
+    topic: "HOOK_USESTATE",
+    explanation: "O estado inicial deve refletir a condição padrão da aplicação antes da interação do usuário."
+  },
+  {
+    question: "19. Qual é a função do <React.StrictMode> em torno de <App /> no arquivo main.jsx?",
+    options: [
+      "A) Deixa a aplicação mais rápida em produção",
+      "B) Ajuda a detectar problemas durante o desenvolvimento, sem afetar o que o usuário final vê",
+      "C) É obrigatório para o CSS funcionar",
+      "D) Substitui a necessidade do ReactDOM.createRoot"
+    ],
+    correct: 1,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "O StrictMode do React realiza verificações adicionais durante o desenvolvimento para identificar possíveis bugs."
+  },
+  {
+    question: "20. O que a função handleClick faz dentro de Saudacao.jsx?",
+    options: [
+      "A) Verifica se o campo nome está vazio e atualiza a mensagem de acordo, usando setMensagem",
+      "B) Cria um novo componente Saudacao",
+      "C) Modifica diretamente o texto no DOM com textContent",
+      "D) Reinicia o valor de nome para \"\""
+    ],
+    correct: 0,
+    topic: "INPUTS_E_EVENTOS",
+    explanation: "Manipuladores de eventos aplicam as lógicas de validação e disparam as atualizações de estado."
+  },
+  {
+    question: "21. Qual comando de terminal cria a estrutura inicial do projeto com Vite e o template de React?",
+    options: [
+      "A) npm create vite@latest meu-primeiro-javascript-react -- --template react",
+      "B) npm install react",
+      "C) node create-react-app",
+      "D) npm run build react"
+    ],
+    correct: 0,
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "O comando 'npm create vite@latest' com a flag '--template react' gera a estrutura inicial do projeto."
+  },
+  {
+    question: "22. Na estrutura final do projeto, onde ficam os arquivos dos quatro componentes (Saudacao.jsx, Contador.jsx, MudarCor.jsx, Calculadora.jsx)?",
+    options: [
+      "A) Direto na raiz do projeto",
+      "B) Dentro de src/components/",
+      "C) Dentro de public/",
+      "D) Dentro de index.html"
+    ],
+    correct: 1,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "Por organização, os componentes de uma aplicação React ficam armazenados na pasta 'src/components'."
+  },
+  {
+    question: "23. Qual é o papel do arquivo App.jsx no projeto final?",
+    options: [
+      "A) Importar e organizar os quatro componentes dentro do header, main e footer da página",
+      "B) Substituir o arquivo style.css",
+      "C) Executar o servidor de desenvolvimento do Vite",
+      "D) Guardar a configuração do npm"
+    ],
+    correct: 0,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "O App.jsx atua como componente raiz que agrupa e coordena os demais componentes."
+  },
+  {
+    question: "24. No Calculadora.jsx, o que o objeto contas armazena dentro da função calcular?",
+    options: [
+      "A) O histórico de todos os cálculos já feitos",
+      "B) O resultado das quatro operações (soma, subtracao, multiplicacao, divisao) já calculadas",
+      "C) Os valores digitados antes de serem convertidos para número",
+      "D) As mensagens de erro da calculadora"
+    ],
+    correct: 1,
+    topic: "INPUTS_E_EVENTOS",
+    explanation: "O objeto mapeia e realiza preventivamente o cálculo de todas as quatro operações fundamentais."
+  },
+  {
+    question: "25. O que acontece na Calculadora.jsx se numero1 ou numero2 estiverem vazios quando um botão de operação é clicado?",
+    options: [
+      "A) O resultado exibido é \"Preencha os dois campos!\" e a função para com return",
+      "B) O React trava e mostra um erro na tela",
+      "C) O cálculo é feito considerando o valor vazio como zero",
+      "D) Nada acontece, o botão fica desabilitado"
+    ],
+    correct: 0,
+    topic: "INPUTS_E_EVENTOS",
+    explanation: "As validações de formulário previnem o processamento caso falte informação nos inputs."
+  },
+  {
+    question: "26. O que acontece se o usuário tentar dividir por zero na Calculadora.jsx?",
+    options: [
+      "A) O resultado exibido é Infinity",
+      "B) A função mostra \"Não é possível dividir por zero!\" e interrompe o cálculo",
+      "C) A aplicação para de funcionar",
+      "D) O React converte automaticamente para zero"
+    ],
+    correct: 1,
+    topic: "INPUTS_E_EVENTOS",
+    explanation: "Verificações preventivas impedem divisão por zero para evitar resultados indesejados."
+  },
+  {
+    question: "27. Qual arquivo é o \"ponto de entrada\" que conecta o React ao HTML da página (o <div id=\"root\">)?",
+    options: [
+      "A) src/App.jsx",
+      "B) src/main.jsx",
+      "C) src/style.css",
+      "D) vite.config.js"
+    ],
+    correct: 1,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "O main.jsx é o script inicial que chama o ReactDOM.createRoot para renderizar a aplicação no HTML."
+  },
+  {
+    question: "28. O que faz a linha ReactDOM.createRoot(document.getElementById(\"root\")).render(...)?",
+    options: [
+      "A) Cria uma raiz do React na div #root e manda renderizar o componente informado dentro dela",
+      "B) Cria um novo arquivo HTML",
+      "C) Instala as dependências do projeto",
+      "D) Compila o CSS do projeto"
+    ],
+    correct: 0,
+    topic: "COMPONENTES_E_ESTRUTURA",
+    explanation: "Essa instrução define a raiz do Virtual DOM associada ao elemento #root do HTML."
+  },
+  {
+    question: "29. Por que o style.css não precisou de nenhuma alteração ao migrar o projeto para React?",
+    options: [
+      "A) Porque o React ignora arquivos CSS",
+      "B) Porque os componentes preservaram as mesmas classes e ids (.card, #contador, #textoCor) usados pelo CSS original",
+      "C) Porque o CSS foi convertido automaticamente pelo Vite",
+      "D) Porque o projeto não usa mais estilos"
+    ],
+    correct: 1,
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "Mantendo-se os seletores e classes no JSX, os estilos nativos continuam válidos."
+  },
+  {
+    question: "30. Antes de entregar o projeto, qual comando deve ser rodado para gerar a versão final e verificar se algo está quebrado?",
+    options: [
+      "A) npm run dev",
+      "B) npm run build",
+      "C) npm install react",
+      "D) npm create vite"
+    ],
+    correct: 1,
+    topic: "ECOSSISTEMA_CSS_TOOLS",
+    explanation: "O comando 'npm run build' compila o código e detecta erros para a versão de produção."
   }
-]
-[
-  {
-    question: "12. Na conversão do Modelo Conceitual para o Modelo Lógico, qual é a regra básica para transformar Entidades, Atributos e Identificadores?",
-    options: [
-      "A) Entidade -> Coluna | Atributo -> Tabela | Identificador -> Chave Estrangeira",
-      "B) Entidade -> Tabela | Atributo -> Coluna | Identificador -> Chave Primária (PK)",
-      "C) Entidade -> Banco | Atributo -> Registro | Identificador -> Índice",
-      "D) Entidade -> Schema | Atributo -> DDL | Identificador -> Constraints"
-    ],
-    correct: 1,
-    explanation: "Esta é a regra clássica de transposição: cada objeto vira uma Tabela, cada característica vira uma Coluna dessa tabela e o identificador vira a Chave Primária (PK) que garante a unicidade."
-  },
-  {
-    question: "13. Como deve ser mapeado no modelo lógico um relacionamento de cardinalidade 1:N (Um-para-Muitos), como entre DEPARTAMENTO (1) e FUNCIONARIO (N)?",
-    options: [
-      "A) Cria-se uma nova tabela intermediária com as duas chaves primárias.",
-      "B) A Chave Estrangeira (FK) obrigatoriamente vai para a tabela do lado N (FUNCIONARIO).",
-      "C) A Chave Estrangeira (FK) obrigatoriamente vai para a tabela do lado 1 (DEPARTAMENTO).",
-      "D) Não se utiliza chave estrangeira em relacionamentos 1:N."
-    ],
-    correct: 1,
-    explanation: "No relacionamento 1:N, para evitar a duplicação de linhas no lado '1', a Chave Primária da tabela pai (lado 1) é herdada como Chave Estrangeira (FK) na tabela filho (lado N)."
-  },
-  {
-    question: "14. O que acontece ao mapear um relacionamento N:M (Muitos-para-Muitos) do modelo conceitual para o lógico?",
-    options: [
-      "A) A FK é colocada em qualquer uma das duas tabelas originais.",
-      "B) Gera-se obrigatoriamente uma nova Tabela Associativa com a PK composta pelas FKs das duas tabelas.",
-      "C) O relacionamento é descartado pois bancos relacionais não suportam cardinalidade N:M.",
-      "D) Os atributos de uma tabela são copiados integralmente para a outra tabela."
-    ],
-    correct: 1,
-    explanation: "Bancos relacionais não conseguem ligar diretamente duas tabelas em relação N:M. Cria-se uma tabela de ligação no meio, transformando o relacionamento em dois relacionamentos 1:N."
-  },
-  {
-    question: "15. Se o modelo conceitual tiver um Atributo Multivalorado (ex: TELEFONE na entidade CLIENTE), como ele é representado no modelo lógico?",
-    options: [
-      "A) Vira uma coluna do tipo texto contendo todos os telefones separados por vírgula na mesma célula.",
-      "B) Vira uma nova tabela auxiliar dedicada com a sua própria PK e uma FK referenciando a tabela CLIENTE.",
-      "C) É eliminado da modelagem por não ser um valor atômico.",
-      "D) Permanece como atributo composto dentro da própria tabela CLIENTE."
-    ],
-    correct: 1,
-    explanation: "Tentar colocar múltiplos valores em um único campo violaria a 1ª Forma Normal. A solução relacional é criar uma tabela auxiliar (ex: TELEFONE) apontando para o cliente via FK."
-  },
-  {
-    question: "16. Considere o seguinte cenário: 'Um PROFESSOR (id_prof, nome) ministra várias DISCIPLINAS (id_disc, nome), e uma DISCIPLINA pode ser ministrada por vários PROFESSORES. O sistema grava o semestre em que o professor ministrou a disciplina.' Qual é a estrutura do Modelo Lógico correto resultante dessa relação?",
-    options: [
-      "A) PROFESSOR (PK id_prof, nome, FK id_disc) | DISCIPLINA (PK id_disc, nome, semestre)",
-      "B) PROFESSOR (PK id_prof, nome) | DISCIPLINA (PK id_disc, nome, FK id_prof, semestre)",
-      "C) PROFESSOR (PK id_prof, nome) | DISCIPLINA (PK id_disc, nome) | MINISTRA (PK/FK id_prof, PK/FK id_disc, semestre)",
-      "D) PROFESSOR_DISCIPLINA (PK id_prof, PK id_disc, nome_prof, nome_disc, semestre)"
-    ],
-    correct: 2,
-    explanation: "Como a relação é de cardinalidade Muitos-para-Muitos (N:M), é obrigatório criar uma tabela associativa (MINISTRA ou PROFESSOR_DISCIPLINA). A Chave Primária dessa tabela é composta pelas duas Chaves Estrangeiras (id_prof e id_disc), e o atributo da relação (semestre) passa a ser uma coluna nessa nova tabela."
-  }
-]
-[
-  {
-    question: "17. Qual é a regra mandatória para que uma tabela esteja na Primeira Forma Normal (1FN)?",
-    options: [
-      "A) Não possuir chaves primárias compostas.",
-      "B) Não possuir dependências transitivas entre atributos não-chave.",
-      "C) Todos os atributos devem possuir valores atômicos (indivisíveis) e não existir grupos repetitivos.",
-      "D) Todos os determinantes devem ser chaves candidatas."
-    ],
-    correct: 2,
-    explanation: "A 1FN garante a atomicidade dos dados: cada célula armazena apenas um único valor e não existem colunas repetidas (como Tel1, Tel2, Tel3)."
-  },
-  {
-    question: "18. Quando uma tabela que já está na 1FN viola a Segunda Forma Normal (2FN)?",
-    options: [
-      "A) Quando possui campos do tipo texto com mais de 255 caracteres.",
-      "B) Quando possui uma chave primária composta e um atributo não-chave depende de apenas UMA PARTE dessa chave.",
-      "C) Quando não possui chave estrangeira cadastrada.",
-      "D) Quando um atributo não-chave depende de outro atributo não-chave."
-    ],
-    correct: 1,
-    explanation: "A 2FN ataca a 'Dependência Parcial'. Se a chave é composta por (A+B), todos os outros atributos devem depender de (A+B) juntos, e não apenas de A ou apenas de B."
-  },
-  {
-    question: "19. O que é uma Dependência Transitiva (que é proibida na Terceira Forma Normal - 3FN)?",
-    options: [
-      "A) Quando uma coluna do tipo data depende do horário do sistema.",
-      "B) Quando um atributo não-chave depende de outro atributo que também NÃO é chave na tabela.",
-      "C) Quando a chave primária muda de valor durante uma transação.",
-      "D) Quando uma chave estrangeira aponta para uma tabela inexistente."
-    ],
-    correct: 1,
-    explanation: "Na 3FN, todos os atributos não-chave devem depender direta e exclusivamente da Chave Primária. Se Nome_Cliente depende de Cod_Cliente, e Cod_Cliente está solto em uma tabela de PEDIDO, há dependência transitiva."
-  },
-  {
-    question: "20. Dada a tabela não-normalizada de Vendas abaixo: TABELA_PEDIDO (NumPedido, DataPedido, CodCliente, NomeCliente, UF). Qual Forma Normal está sendo violada e qual é a solução normalizada correta para este banco de dados?",
-    options: [
-      "A) Viola a 1ª Forma Normal (1FN). Solução: Unir todas as colunas em um único campo de texto separado por vírgulas.",
-      "B) Viola a 2ª Forma Normal (2FN). Solução: Criar uma tabela separada para UF contendo todas as cidades do país.",
-      "C) Viola a 3ª Forma Normal (3FN), pois NomeCliente e UF dependem do CodCliente (dependência transitiva) e não da chave primária NumPedido. Solução: CLIENTE (PK CodCliente, NomeCliente, UF) e PEDIDO (PK NumPedido, DataPedido, FK CodCliente).",
-      "D) Não há nenhuma violação; a tabela já se encontra perfeitamente normalizada."
-    ],
-    correct: 2,
-    explanation: "Os atributos NomeCliente e UF dependem diretamente de CodCliente, e não da PK NumPedido. Essa dependência transitiva viola a 3FN. Ao isolar os dados do cliente em sua própria tabela, elimina-se a redundância de repetir o nome e a UF a cada novo pedido realizado."
-  },
-  {
-    question: "21. Qual é a diferença prática de armazenamento entre os tipos de dados CHAR(20) e VARCHAR(20) no MySQL?",
-    options: [
-      "A) CHAR armazena apenas números; VARCHAR armazena letras e números.",
-      "B) CHAR(20) ocupa sempre 20 bytes fixos na memória; VARCHAR(20) ocupa apenas o tamanho do texto digitado (até 20).",
-      "C) VARCHAR aceita apenas letras maiúsculas; CHAR aceita minúsculas.",
-      "D) Não há diferença prática, ambos alocam a memória de forma idêntica."
-    ],
-    correct: 1,
-    explanation: "CHAR é de tamanho estático (se gravar 'Ana', usará os 20 espaços). VARCHAR é de tamanho dinâmico (se gravar 'Ana', usará apenas 3 bytes + byte de controle)."
-  },
-  {
-    question: "22. Qual comando DDL é utilizado para alterar a estrutura de uma tabela já existente (como adicionar ou excluir uma coluna)?",
-    options: [
-      "A) UPDATE TABLE",
-      "B) MODIFY TABLE",
-      "C) ALTER TABLE",
-      "D) CHANGE TABLE"
-    ],
-    correct: 2,
-    explanation: "O comando DDL ALTER TABLE é o padrão SQL para modificar a definição de uma tabela (ex.: ADD para criar coluna, DROP COLUMN para remover)."
-  },
-  {
-    question: "23. Para apagar completamente uma tabela e todos os seus dados de forma permanente do banco de dados, qual comando DDL deve ser executado?",
-    options: [
-      "A) DELETE FROM nome_tabela;",
-      "B) REMOVE TABLE nome_tabela;",
-      "C) DROP TABLE nome_tabela;",
-      "D) ERASE TABLE nome_tabela;"
-    ],
-    correct: 2,
-    explanation: "O comando DDL DROP TABLE remove a tabela e toda a sua estrutura do dicionário de dados do banco. Já o DELETE é um comando DML que apaga apenas as linhas."
-  }
-]
-[
-  {
-    question: "24. Escreva o script SQL DDL para criar o banco de dados chamado SISTEMA_FACULDADE e em seguida selecione-o para uso.",
-    type: "script",
-    expectedCode: "CREATE DATABASE SISTEMA_FACULDADE;\nUSE SISTEMA_FACULDADE;",
-    keywords: ["CREATE DATABASE", "SISTEMA_FACULDADE", "USE"],
-    explanation: "O comando CREATE DATABASE cria o ambiente de armazenamento do banco de dados e o USE altera o contexto da sessão, informando ao MySQL qual base receberá os próximos comandos SQL."
-  },
-  {
-    question: "25. Escreva o script SQL DDL completo para criar a tabela CURSO contendo:\n- id_curso: inteiro, auto-incremento, Chave Primária\n- nome_curso: texto de até 100 caracteres, obrigatório\n- sigla: texto de 5 caracteres, valor único\n- valor_mensalidade: decimal com 8 dígitos no total e 2 casas decimais.",
-    type: "script",
-    expectedCode: "CREATE TABLE CURSO (\n    id_curso INT AUTO_INCREMENT PRIMARY KEY,\n    nome_curso VARCHAR(100) NOT NULL,\n    sigla VARCHAR(5) UNIQUE,\n    valor_mensalidade DECIMAL(8,2)\n);",
-    keywords: ["CREATE TABLE", "CURSO", "AUTO_INCREMENT", "PRIMARY KEY", "NOT NULL", "UNIQUE", "DECIMAL(8,2)"],
-    explanation: "INT AUTO_INCREMENT PRIMARY KEY define o identificador mestre numérico automático. VARCHAR(100) NOT NULL cria a coluna obrigatória. UNIQUE garante a unicidade da sigla e DECIMAL(8,2) configura a precisão monetária de ponto fixo."
-  },
-  {
-    question: "26. Escreva o script SQL DDL para criar a tabela ALUNO conectando-a à tabela CURSO através de uma Chave Estrangeira (FK):\n- rgm: inteiro, Chave Primária\n- nome_aluno: texto de até 80 caracteres, obrigatório\n- id_curso: inteiro, obrigatório\n- Restrição de Chave Estrangeira com o nome 'fk_aluno_curso'.",
-    type: "script",
-    expectedCode: "CREATE TABLE ALUNO (\n    rgm INT PRIMARY KEY,\n    nome_aluno VARCHAR(80) NOT NULL,\n    id_curso INT NOT NULL,\n    CONSTRAINT fk_aluno_curso FOREIGN KEY (id_curso) REFERENCES CURSO(id_curso)\n);",
-    keywords: ["CREATE TABLE", "ALUNO", "PRIMARY KEY", "CONSTRAINT", "fk_aluno_curso", "FOREIGN KEY", "REFERENCES"],
-    explanation: "A sintaxe CONSTRAINT fk_aluno_curso FOREIGN KEY (id_curso) REFERENCES CURSO(id_curso) estabelece a regra de integridade referencial física, impedindo o cadastro de alunos vinculados a cursos inexistentes."
-  },
-  {
-    question: "27. Escreva o comando SQL DDL para adicionar a coluna email (texto até 60 caracteres, valor único) na tabela ALUNO criada anteriormente.",
-    type: "script",
-    expectedCode: "ALTER TABLE ALUNO ADD email VARCHAR(60) UNIQUE;",
-    keywords: ["ALTER TABLE", "ALUNO", "ADD", "email", "VARCHAR(60)", "UNIQUE"],
-    explanation: "O comando DDL ALTER TABLE juntamente com a instrução ADD permite modificar a estrutura de uma tabela existente adicionando novos campos e constraints sem apagar os dados existentes."
-  }
-]
 ];
 
-function saveProgress() {
-  localStorage.setItem("quiz_current_index", currentQuestionIndex);
-  localStorage.setItem("quiz_score", score);
-}
+let currentIndex = 0;
+let userAnswers = [];
 
-function resetProgress() {
-  localStorage.removeItem("quiz_current_index");
-  localStorage.removeItem("quiz_score");
-  currentQuestionIndex = 0;
-  score = 0;
-}
+const questionCountEl = document.getElementById("question-count");
+const questionTitleEl = document.getElementById("question-title");
+const optionsContainerEl = document.getElementById("options-container");
+const explanationBoxEl = document.getElementById("explanation-box");
+const explanationTextEl = document.getElementById("explanation-text");
+const nextBtn = document.getElementById("next-btn");
+const restartBtn = document.getElementById("restart-btn");
+
+const quizBodyEl = document.getElementById("quiz-body");
+const resultScreenEl = document.getElementById("result-screen");
+const finalScoreEl = document.getElementById("final-score");
+const studyRecommendationEl = document.getElementById("study-recommendation");
+const restartQuizBtn = document.getElementById("restart-quiz-btn");
 
 function initQuiz() {
-  loadProgress();
-
-  if (totalQuestionsSpan) totalQuestionsSpan.textContent = questions.length;
-
-  if (currentQuestionIndex >= questions.length) {
-    showResult();
-  } else {
-    if (resultScreen) resultScreen.classList.add("hidden");
-    if (quizScreen) quizScreen.classList.remove("hidden");
-    showQuestion();
-  }
+  currentIndex = 0;
+  userAnswers = [];
+  quizBodyEl.classList.remove("hidden");
+  resultScreenEl.classList.add("hidden");
+  renderQuestion();
 }
 
-function restartQuiz() {
-  resetProgress();
-  if (resultScreen) resultScreen.classList.add("hidden");
-  if (quizScreen) quizScreen.classList.remove("hidden");
-  showQuestion();
-}
+function renderQuestion() {
+  const currentQ = questions[currentIndex];
 
-function showQuestion() {
-  resetState();
-  const currentQuestion = questions[currentQuestionIndex];
+  questionCountEl.textContent = `Pergunta ${currentIndex + 1} de ${questions.length}`;
+  questionTitleEl.textContent = currentQ.question;
 
-  if (currentQuestionSpan) currentQuestionSpan.textContent = currentQuestionIndex + 1;
-  if (questionText) questionText.textContent = currentQuestion.question;
+  optionsContainerEl.innerHTML = "";
+  explanationBoxEl.classList.add("hidden");
 
-  currentQuestion.options.forEach((option, index) => {
+  currentQ.options.forEach((optionText, index) => {
     const button = document.createElement("button");
-    button.textContent = option;
-    button.classList.add("option-btn");
-    button.addEventListener("click", () => selectOption(index, button));
-    optionsContainer.appendChild(button);
+    button.textContent = optionText;
+    button.className = "option-btn";
+    button.onclick = () => handleSelectOption(index);
+    optionsContainerEl.appendChild(button);
   });
 }
 
-function resetState() {
-  if (nextBtn) {
-    nextBtn.disabled = true;
-    nextBtn.classList.add("hidden");
-  }
-  if (explanationBox) explanationBox.classList.add("hidden");
-  if (optionsContainer) optionsContainer.innerHTML = "";
-}
+function handleSelectOption(selectedIndex) {
+  const currentQ = questions[currentIndex];
+  userAnswers.push(selectedIndex);
 
-function selectOption(selectedIndex, selectedButton) {
-  const currentQuestion = questions[currentQuestionIndex];
-  const allButtons = optionsContainer.querySelectorAll(".option-btn");
+  const optionButtons = optionsContainerEl.querySelectorAll(".option-btn");
 
-  allButtons.forEach((btn, index) => {
+  optionButtons.forEach((btn, index) => {
     btn.disabled = true;
-    if (index === currentQuestion.correct) {
+    if (index === currentQ.correct) {
       btn.classList.add("correct");
+    } else if (index === selectedIndex) {
+      btn.classList.add("wrong");
     }
   });
 
-  if (selectedIndex === currentQuestion.correct) {
-    score++;
+  explanationTextEl.textContent = currentQ.explanation;
+  explanationBoxEl.classList.remove("hidden");
+}
+nextBtn.onclick = () => {
+  currentIndex++;
+  if (currentIndex < questions.length) {
+    renderQuestion();
   } else {
-    selectedButton.classList.add("incorrect");
+    showResults();
+  }
+};
+
+// Exibir Tela de Resultado
+function showResults() {
+  quizBodyEl.classList.add("hidden");
+  resultScreenEl.classList.remove("hidden");
+
+  let acertos = 0;
+  const errosPorTopico = {
+    DOM_IMPERATIVO_VS_DECLARATIVO: 0,
+    SINTAXE_JSX: 0,
+    HOOK_USESTATE: 0,
+    COMPONENTES_E_ESTRUTURA: 0,
+    INPUTS_E_EVENTOS: 0,
+    ECOSSISTEMA_CSS_TOOLS: 0
+  };
+
+  userAnswers.forEach((answerIndex, qIndex) => {
+    const q = questions[qIndex];
+    if (answerIndex === q.correct) {
+      acertos++;
+    } else {
+      errosPorTopico[q.topic]++;
+    }
+  });
+
+  finalScoreEl.textContent = `Você acertou ${acertos} de ${questions.length} perguntas!`;
+
+  let maxErros = 0;
+  let piorTopicoKey = null;
+
+  for (const [topico, qteErros] of Object.entries(errosPorTopico)) {
+    if (qteErros > maxErros) {
+      maxErros = qteErros;
+      piorTopicoKey = topico;
+    }
   }
 
-  saveProgress();
-
-  if (explanationText && currentQuestion.explanation) {
-    explanationText.textContent = currentQuestion.explanation;
-    explanationBox.classList.remove("hidden");
-  }
-
-  if (nextBtn) {
-    nextBtn.disabled = false;
-    nextBtn.classList.remove("hidden");
-  }
-}
-
-function handleNextQuestion() {
-  currentQuestionIndex++;
-  saveProgress();
-
-  if (currentQuestionIndex < questions.length) {
-    showQuestion();
+  if (maxErros === 0) {
+    studyRecommendationEl.innerHTML = `
+      <h3>🌟 Desempenho Perfeito!</h3>
+      <p>Parabéns! Você demonstrou domínio total sobre os conceitos de React e JS puro.</p>
+    `;
   } else {
-    showResult();
+    const topicoInfo = TOPICOS_ESTUDO[piorTopicoKey];
+    studyRecommendationEl.innerHTML = `
+      <h3>📌 Recomendação de Foco de Estudo:</h3>
+      <p><strong>Tópico com mais erros:</strong> ${topicoInfo.nome} (${maxErros} erro(s)).</p>
+      <p style="margin-top: 8px;"><strong>O que revisar:</strong> ${topicoInfo.descricao}</p>
+    `;
   }
 }
 
-function showResult() {
-  if (quizScreen) quizScreen.classList.add("hidden");
-  if (resultScreen) resultScreen.classList.remove("hidden");
-  if (scoreSpan) scoreSpan.textContent = score;
-  if (scoreTotalSpan) scoreTotalSpan.textContent = questions.length;
-}
+restartBtn.onclick = initQuiz;
+restartQuizBtn.onclick = initQuiz;
 
 initQuiz();
