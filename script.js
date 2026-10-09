@@ -465,13 +465,13 @@ function showResults() {
 
   if (maxErros === 0) {
     studyRecommendationEl.innerHTML = `
-      <h3>🌟 Desempenho Perfeito!</h3>
+      <h3>Desempenho Perfeito!</h3>
       <p>Parabéns! Você demonstrou domínio total sobre os conceitos de React e JS puro.</p>
     `;
   } else {
     const topicoInfo = TOPICOS_ESTUDO[piorTopicoKey];
     studyRecommendationEl.innerHTML = `
-      <h3>📌 Recomendação de Foco de Estudo:</h3>
+      <h3> Recomendação de Foco de Estudo:</h3>
       <p><strong>Tópico com mais erros:</strong> ${topicoInfo.nome} (${maxErros} erro(s)).</p>
       <p style="margin-top: 8px;"><strong>O que revisar:</strong> ${topicoInfo.descricao}</p>
     `;
